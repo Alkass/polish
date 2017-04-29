@@ -109,15 +109,15 @@ pub mod test_case {
         let status: TestCaseStatus = (test.exec)(&mut logger);
         // TODO: get logger stats
         let ending_time: f32 =  0 as f32; // TODO: get ending time
-        println!("{} PASS  {} FAIL {} WARN  {} INFO",
+        println!("{} PASS  {} FAIL  {} WARN  {} INFO",
             logger.get_num_pass(),
             logger.get_num_fail(),
             logger.get_num_warn(),
             logger.get_num_info()
         );
         let mark: &str = match status {
-            TestCaseStatus::PASSED => "✅",
-            TestCaseStatus::FAILED => "❌",
+            TestCaseStatus::PASSED  => "✅",
+            TestCaseStatus::FAILED  => "❌",
             TestCaseStatus::SKIPPED => "❗",
             TestCaseStatus::UNKNOWN => "⁉️",
         };
