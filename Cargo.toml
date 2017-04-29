@@ -1,0 +1,8 @@
+[package]
+name = "polish"
+version = "0.1.0"
+authors = ["Fadi Hanna Al-Kass <eliya.3@wright.edu>"]
+
+[dependencies]
+chrono = "0.3.0"
+ansi_term = "0.9.0"
