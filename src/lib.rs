@@ -1,6 +1,7 @@
 
 extern crate chrono;
 extern crate ansi_term;
+extern crate time;
 
 pub mod logger {
     use chrono::prelude::Local;
@@ -75,6 +76,7 @@ pub mod logger {
 }
 
 pub mod test_case {
+    use time;
     use logger::Logger;
     pub enum TestCaseStatus {
         PASSED,
@@ -99,16 +101,15 @@ pub mod test_case {
     pub struct TestCaseResults {
         title: &'static str,
         criteria: &'static str,
-        duration: f32,
+        duration: i32,
         status: TestCaseStatus
     }
     pub fn run_test (test: TestCase) -> Vec<TestCaseResults> {
         println!("Test: {} ({})", test.title, test.criteria);
         let mut logger: Logger = Logger::new();
-        let starting_time: f32 = 0 as f32; // TODO: get starting time
+        let starting_time: i32 = time::now().tm_nsec; // TODO: get starting time
         let status: TestCaseStatus = (test.exec)(&mut logger);
-        // TODO: get logger stats
-        let ending_time: f32 =  0 as f32; // TODO: get ending time
+        let ending_time: i32 =  time::now().tm_nsec; // TODO: get ending time
         println!("{} PASS  {} FAIL  {} WARN  {} INFO",
             logger.get_num_pass(),
             logger.get_num_fail(),
@@ -125,7 +126,7 @@ pub mod test_case {
         vec![TestCaseResults {
             title: test.title,
             criteria: test.criteria,
-            duration: ending_time - starting_time,
+            duration: (ending_time - starting_time) / 1000,
             status: status
         }]
     }
@@ -149,7 +150,7 @@ pub mod test_case {
         return Vec::new();
     }
     pub fn statify (stats: &Vec<TestCaseResults>) -> bool {
-        let (mut total_count, mut total_duration): (i32, f32) = (0, 0 as f32);
+        let (mut total_count, mut total_duration): (i32, i32) = (0, 0);
         let (mut pass, mut fail, mut skip, mut unknown): (i32, i32, i32, i32) = (0, 0, 0, 0);
         println!("\n---\n");
         for stat in stats.iter() {
@@ -167,9 +168,9 @@ pub mod test_case {
             };
             total_count += 1;
             total_duration += stat.duration;
-            println!("{} ({}s): {}", stat.title, stat.duration, formatted_message);
+            println!("{} ({} Nanosecond(s)): {}", stat.title, stat.duration, formatted_message);
         }
-        println!("\nRan {} Test Case(s) in {} Second(s)", total_count, total_duration);
+        println!("\nRan {} Test Case(s) in {} Nanosecond(s)", total_count, total_duration);
         println!("{} Passed  {} Failed  {} Skipped  {} Unknown", pass, fail, skip, unknown);
         return (fail + unknown) > 0;
     }
