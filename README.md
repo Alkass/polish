@@ -73,12 +73,8 @@ And that's it! Your test case is ready to roll ^_^
 
 This test case produces the following output:
 
-```
-Test: Test Case Title (Test Case Criteria)
-PASS - 2017-04-30-05:00: Good to go
-1 PASS  0 FAIL  0 WARN  0 INFO
-Test Case Criteria ... ✅
-```
+![alt text](screenshots/run_test.png "")
+
 
 > `run_test` has a return value, but we'll get back to that later.
 
@@ -160,6 +156,8 @@ INFO - 2017-04-30-05:00: Skipping this one
 0 PASS  0 FAIL  0 WARN  1 INFO
 Testing Criteria ... ❗
 ```
+
+This test case demo is available [here](examples/run_tests_from_class.rs)
 
 ### More Statistics
 > All runner functions (`run_test`, `run_tests`, and `run_tests_from_class`) return a `TestCaseResults` object that can be passed to a function called `statify` for more statistical information, e,g.:
