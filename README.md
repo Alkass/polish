@@ -91,19 +91,19 @@ If you have multiple test cases to work with, you can store them in a vector and
 ```rust
 let my_test_cases = vec![
 TestCase::new("1st Test Case Title", "1st Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
-	logger.pass(format!("Good to go"));
-	TestCaseStatus::PASSED
+  logger.pass(format!("Good to go"));
+  TestCaseStatus::PASSED
 })),
 TestCase::new("2nd Test Case Title", "2nd Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
-	logger.warn(format!("This is a warning"));
-	TestCaseStatus::UNKNOWN
+  logger.warn(format!("This is a warning"));
+  TestCaseStatus::UNKNOWN
 })),
 TestCase::new("3rd Test Case Title", "3rd Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
-	logger.fail(format!("this is a failure"));
-	TestCaseStatus::FAILED
+  logger.fail(format!("this is a failure"));
+  TestCaseStatus::FAILED
 }))
 ];
-	run_tests(my_test_cases);
+  run_tests(my_test_cases);
 ```
 
 This produces the following output:
@@ -132,18 +132,18 @@ You may have the desire to implement your object each with its own set of test c
 ```rust
 struct MyTestCase;
 impl Testable for MyTestCase {
-	fn tests (self) -> Vec<TestCase> {
-		vec![
-			TestCase::new("Some Title #1", "Testing Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
-				logger.pass(format!("Good to go"));
-				TestCaseStatus::PASSED
-			})),
-			TestCase::new("Some Title #2", "Testing Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
-				logger.info(format!("Skipping this one"));
-				TestCaseStatus::SKIPPED
-			}))
-		]
-	}
+  fn tests (self) -> Vec<TestCase> {
+    vec![
+      TestCase::new("Some Title #1", "Testing Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+        logger.pass(format!("Good to go"));
+        TestCaseStatus::PASSED
+      })),
+      TestCase::new("Some Title #2", "Testing Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+        logger.info(format!("Skipping this one"));
+        TestCaseStatus::SKIPPED
+      }))
+    ]
+  }
 }
 run_tests_from_class(MyTestCase{});
 ```
