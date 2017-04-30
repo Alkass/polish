@@ -75,7 +75,6 @@ This test case produces the following output:
 
 ![alt text](screenshots/run_test.png "")
 
-
 > `run_test` has a return value, but we'll get back to that later.
 
 > This single test case demo is available [here](examples/run_test.rs)
@@ -104,21 +103,7 @@ TestCase::new("3rd Test Case Title", "3rd Test Case Criteria", Box::new(|logger:
 
 This produces the following output:
 
-```
-Test: 1st Test Case Title (1st Test Case Criteria)
-PASS - 2017-04-30-05:00: Good to go
-1 PASS  0 FAIL  0 WARN  0 INFO
-1st Test Case Criteria ... ✅
-Test: 2nd Test Case Title (2nd Test Case Criteria)
-WARN - 2017-04-30-05:00: This is a warning
-0 PASS  0 FAIL  1 WARN  0 INFO
-2nd Test Case Criteria ... ⁉️
-
-Test: 3rd Test Case Title (3rd Test Case Criteria)
-FAIL - 2017-04-30-05:00: this is a failure
-0 PASS  1 FAIL  0 WARN  0 INFO
-3rd Test Case Criteria ... ❌
-```
+![alt text](screenshots/run_tests.png "")
 
 This test case demo is available [here](examples/run_tests.rs)
 
@@ -146,16 +131,7 @@ run_tests_from_class(MyTestCase{});
 
 This produces the following:
 
-```
-Test: Some Title #1 (Testing Criteria)
-PASS - 2017-04-30-05:00: Good to go
-1 PASS  0 FAIL  0 WARN  0 INFO
-Testing Criteria ... ✅
-Test: Some Title #2 (Testing Criteria)
-INFO - 2017-04-30-05:00: Skipping this one
-0 PASS  0 FAIL  0 WARN  1 INFO
-Testing Criteria ... ❗
-```
+![alt text](screenshots/run_tests_from_class.png "")
 
 This test case demo is available [here](examples/run_tests_from_class.rs)
 
@@ -169,13 +145,7 @@ statify(&res);
 
 This produces the following:
 
-```
-Some Title #1 (0s): Testing Criteria
-Some Title #2 (0s): Testing Criteria
-
-Ran 2 Test Case(s) in 0 Second(s)
-1 Passed  0 Failed  1 Skipped  0 Unknown
-```
+![alt text](screenshots/statify.png "")
 
 > `statify` returns a boolean value that's `true` if no test cases returned `FAILED` or `UNKNOWN`.
 
