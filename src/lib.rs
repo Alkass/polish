@@ -132,9 +132,9 @@ pub mod test_case {
     pub fn run_tests (tests: Vec<TestCase>) -> Vec<TestCaseResults> {
         let mut results: Vec<TestCaseResults> = vec![];
         for test in tests {
-			for item in run_test(test) {
-				results.push(item);
-			}
+            for item in run_test(test) {
+                results.push(item);
+            }
         }
         return results;
     }
