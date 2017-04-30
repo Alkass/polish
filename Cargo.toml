@@ -3,9 +3,14 @@ name = "polish"
 description = "Polish is a mini testing framework for the Rust system programming language meant to allow the writing of test-driven applications in a unified and expressive manner."
 version = "0.1.0"
 authors = ["Fadi Hanna Al-Kass"]
-
-[[test]]
-name = "test_runner"
+documentation = "https://github.com/AlKass/polish"
+homepage = "https://github.com/AlKass/polish"
+repository = "https://github.com/AlKass/polish"
+readme = "README.md"
+keywords = ["Rust", "Testing", "Test-Driven Development"]
+categories = ["Utilities", "Testing"]
+license = "MIT"
+license-file = "License.md"
 
 [dependencies]
 chrono = "0.3.0"
