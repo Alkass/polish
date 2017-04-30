@@ -154,4 +154,4 @@ This produces the following:
 > `statify` returns a boolean value that's `true` if no test cases returned `FAILED` or `UNKNOWN`.
 
 ## Author
-[Fadi Hanna Al-Kass](https://github.com/alkss)
+[Fadi Hanna Al-Kass](https://github.com/alkass)
