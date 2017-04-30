@@ -102,7 +102,7 @@ pub mod test_case {
         duration: f32,
         status: TestCaseStatus
     }
-    pub fn run_test (test: TestCase) -> TestCaseResults {
+    pub fn run_test (test: TestCase) -> Vec<TestCaseResults> {
         println!("Test: {} ({})", test.title, test.criteria);
         let mut logger: Logger = Logger::new();
         let starting_time: f32 = 0 as f32; // TODO: get starting time
@@ -122,17 +122,19 @@ pub mod test_case {
             TestCaseStatus::UNKNOWN => "⁉️",
         };
         println!("{} ... {}", test.criteria, mark);
-        TestCaseResults {
+        vec![TestCaseResults {
             title: test.title,
             criteria: test.criteria,
             duration: ending_time - starting_time,
             status: status
-        }
+        }]
     }
     pub fn run_tests (tests: Vec<TestCase>) -> Vec<TestCaseResults> {
         let mut results: Vec<TestCaseResults> = vec![];
         for test in tests {
-            results.push(run_test(test));
+			for item in run_test(test) {
+				results.push(item);
+			}
         }
         return results;
     }
