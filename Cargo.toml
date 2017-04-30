@@ -1,7 +1,7 @@
 [package]
 name = "polish"
 description = "Polish is a mini testing framework for the Rust system programming language meant to allow the writing of test-driven applications in a unified and expressive manner."
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Fadi Hanna Al-Kass"]
 documentation = "https://github.com/AlKass/polish"
 homepage = "https://github.com/AlKass/polish"
