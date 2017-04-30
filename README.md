@@ -127,9 +127,58 @@ FAIL - 2017-04-30-05:00: this is a failure
 This test case demo is available [here](examples/run_tests.rs)
 
 ### Writing Tests as Part of an Object
-TBD
+You may have the desire to implement your object each with its own set of test cases. For that, you need to implement the `polish::test_case::Testable` `trait` in each of your objects, then pass each object to a function called `run_tests_from_class` you can include from `polish::test_case` as well, e,g.:
 
-> All runner functions (`run_test`, `run_tests`, and `run_tests_from_class`) return a `TestCaseResults` object that can be passed to a function called `statify` for more statistical information.
+```rust
+struct MyTestCase;
+impl Testable for MyTestCase {
+	fn tests (self) -> Vec<TestCase> {
+		vec![
+			TestCase::new("Some Title #1", "Testing Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+				logger.pass(format!("Good to go"));
+				TestCaseStatus::PASSED
+			})),
+			TestCase::new("Some Title #2", "Testing Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+				logger.info(format!("Skipping this one"));
+				TestCaseStatus::SKIPPED
+			}))
+		]
+	}
+}
+run_tests_from_class(MyTestCase{});
+```
+
+This produces the following:
+
+```
+Test: Some Title #1 (Testing Criteria)
+PASS - 2017-04-30-05:00: Good to go
+1 PASS  0 FAIL  0 WARN  0 INFO
+Testing Criteria ... ✅
+Test: Some Title #2 (Testing Criteria)
+INFO - 2017-04-30-05:00: Skipping this one
+0 PASS  0 FAIL  0 WARN  1 INFO
+Testing Criteria ... ❗
+```
+
+### More Statistics
+> All runner functions (`run_test`, `run_tests`, and `run_tests_from_class`) return a `TestCaseResults` object that can be passed to a function called `statify` for more statistical information, e,g.:
+
+```rust
+let res = run_tests_from_class(MyTestCase{});
+statify(&res);
+```
+
+This produces the following:
+
+```
+Some Title #1 (0s): Testing Criteria
+
+Some Title #2 (0s): Testing Criteria
+
+Ran 2 Test Case(s) in 0 Second(s)
+1 Passed  0 Failed  1 Skipped  0 Unknown
+```
 
 > `statify` returns a boolean value that's `true` if no test cases returned `FAILED` or `UNKNOWN`.
 
