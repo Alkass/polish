@@ -1,3 +1,5 @@
+![Polish Logo](https://cloud.githubusercontent.com/assets/17054134/25564962/b9f27b44-2dbe-11e7-9ab2-d5bb25b8de27.png)
+
 # Polish
 
 `Polish` is a mini testing framework for the `Rust` system programming language meant to allow the writing of test-driven applications in a unified and expressive manner.
