@@ -12,6 +12,9 @@ categories = ["development-tools::testing"]
 license = "MIT"
 license-file = "License.md"
 
+[badges]
+travis-ci = { repository = "https://github.com/AlKass/polish" }
+
 [dependencies]
 chrono = "0.3.0"
 ansi_term = "0.9.0"
