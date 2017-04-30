@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/AlKass/polish.svg?branch=master)](https://travis-ci.org/AlKass/polish)
-[![Crates.io](https://img.shields.io/crates/v/pagerank.svg)](https://crates.io/crates/polish)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![Polish Logo](https://cloud.githubusercontent.com/assets/17054134/25564962/b9f27b44-2dbe-11e7-9ab2-d5bb25b8de27.png)
