@@ -12,6 +12,12 @@
 Add the following under `[dependencies]` inside your project's `Cargo.toml` file:
 
 ```yaml
+polish = "0.1.1"
+```
+
+Or use the following if you'd like to use nightly releases:
+
+```yaml
 polish = { git = "https://github.com/alkass/polish", branch = "next" }
 ```
 
