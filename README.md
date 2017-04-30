@@ -173,7 +173,6 @@ This produces the following:
 
 ```
 Some Title #1 (0s): Testing Criteria
-
 Some Title #2 (0s): Testing Criteria
 
 Ran 2 Test Case(s) in 0 Second(s)
