@@ -50,7 +50,7 @@ if you want to log some formatted output, you can use the logger object that's p
 Logger has 4 logging functions you can use (`pass`, `fail`, `info`, `warn`). These functions take a `message` of type `String` which means you can pass formatted text to it using the `format!` macro, e.g.:
 
 ```rust
-logger.info(format!("this is some info"));
+logger.info(format!("{} + {} = {}", 1, 2, 1 + 2));
 ```
 
 These logging statements are counted by the logger object, and the final statistics are shown to you at the end of the execution of each test case.
