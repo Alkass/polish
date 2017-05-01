@@ -91,7 +91,7 @@ This test case produces the following output:
 
 > `run_test` has a return value, but we'll get back to that later.
 
-> This single test case demo is available [here](examples/run_test.rs)
+> This single test case is available [here](examples/run_test.rs)
 
 ### Working with Multiple Test Cases
 
@@ -119,7 +119,7 @@ This produces the following output:
 
 ![alt text](screenshots/run_tests.png "")
 
-This test case demo is available [here](examples/run_tests.rs)
+> This test case is available [here](examples/run_tests.rs)
 
 ### Writing Tests as Part of an Object
 You may have the desire to implement your object each with its own set of test cases. For that, you need to implement the `polish::test_case::Testable` `trait` in each of your objects, then pass each object to a function called `run_tests_from_class` you can include from `polish::test_case` as well, e,g.:
@@ -147,7 +147,7 @@ This produces the following:
 
 ![alt text](screenshots/run_tests_from_class.png "")
 
-This test case demo is available [here](examples/run_tests_from_class.rs)
+> This test case is available [here](examples/run_tests_from_class.rs)
 
 ### More Statistics
 > All runner functions (`run_test`, `run_tests`, and `run_tests_from_class`) return a `TestCaseResults` object that can be passed to a function called `statify` for more statistical information, e,g.:
