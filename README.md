@@ -64,7 +64,7 @@ These logging statements are counted by the logger object, and the final statist
 To run a single test case, include the `run_test` function from `polish::test_case` as follows:
 
 ```rust
-use polish::test_case::run_test
+use polish::test_case::run_test;
 ```
 
 Implement your test case as follows:
