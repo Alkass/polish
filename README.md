@@ -106,10 +106,10 @@ let my_test_cases = vec![
       logger.warn(format!("This is a warning"));
       TestCaseStatus::UNKNOWN
     })),
-TestCase::new("3rd Test Case Title", "3rd Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
-  logger.fail(format!("this is a failure"));
-  TestCaseStatus::FAILED
-}))
+    TestCase::new("3rd Test Case Title", "3rd Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+      logger.fail(format!("this is a failure"));
+      TestCaseStatus::FAILED
+    }))
 ];
   run_tests(my_test_cases);
 ```
