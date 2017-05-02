@@ -32,9 +32,9 @@ pub struct TestCaseResults {
 pub fn run_test(test: TestCase) -> Vec<TestCaseResults> {
     println!("Test: {} ({})", test.title, test.criteria);
     let mut logger: Logger = Logger::new();
-    let starting_time: i32 = time::now().tm_nsec; // TODO: get starting time
+    let starting_time: i32 = time::now().tm_nsec;
     let status: TestCaseStatus = (test.exec)(&mut logger);
-    let ending_time: i32 = time::now().tm_nsec; // TODO: get ending time
+    let ending_time: i32 = time::now().tm_nsec;
     let mark: &str = match status {
         TestCaseStatus::PASSED => "✅",
         TestCaseStatus::FAILED => "❌",
