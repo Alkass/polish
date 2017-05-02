@@ -7,7 +7,7 @@
 
 # Polish
 
-`Polish` is a mini testing framework for the `Rust` system programming language meant to allow the writing of test-driven applications in a unified and expressive manner.
+`Polish` is a mini testing framework for the `Rust` system programming language that allows the writing of test-driven applications in a unified and expressive manner.
 
 ## Getting Started
 
