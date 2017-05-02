@@ -70,3 +70,13 @@ impl Logger {
         self._info
     }
 }
+
+impl Drop for Logger {
+    fn drop(&mut self) {
+        println!("{} PASS  {} FAIL  {} WARN  {} INFO",
+                 self.get_num_pass(),
+                 self.get_num_fail(),
+                 self.get_num_warn(),
+                 self.get_num_info());
+    }
+}

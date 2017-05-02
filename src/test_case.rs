@@ -35,11 +35,6 @@ pub fn run_test(test: TestCase) -> Vec<TestCaseResults> {
     let starting_time: i32 = time::now().tm_nsec; // TODO: get starting time
     let status: TestCaseStatus = (test.exec)(&mut logger);
     let ending_time: i32 = time::now().tm_nsec; // TODO: get ending time
-    println!("{} PASS  {} FAIL  {} WARN  {} INFO",
-             logger.get_num_pass(),
-             logger.get_num_fail(),
-             logger.get_num_warn(),
-             logger.get_num_info());
     let mark: &str = match status {
         TestCaseStatus::PASSED => "✅",
         TestCaseStatus::FAILED => "❌",
