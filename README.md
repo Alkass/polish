@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <div align="center">
-  <img src="https://cloud.githubusercontent.com/assets/17054134/25564962/b9f27b44-2dbe-11e7-9ab2-d5bb25b8de27.png" />
+  <img src="logo.png" />
 </div>
 
 # Polish
