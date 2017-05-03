@@ -1,4 +1,5 @@
 use time;
+use ansi_term::Colour::{Green, Red, Yellow};
 use logger::Logger;
 pub enum TestCaseStatus {
     PASSED,
@@ -41,11 +42,13 @@ pub fn run_test(test: TestCase) -> Vec<TestCaseResults> {
         TestCaseStatus::SKIPPED => "❗",
         TestCaseStatus::UNKNOWN => "⁉️",
     };
+    let duration: i32 = (ending_time - starting_time) / 1000;
+    println!("Test took {} nanosecond(s) to run", duration);
     println!("{} ... {}", test.criteria, mark);
     vec![TestCaseResults {
              title: test.title,
              criteria: test.criteria,
-             duration: (ending_time - starting_time) / 1000,
+             duration: duration,
              status: status,
          }]
 }
@@ -80,10 +83,10 @@ pub fn statify(stats: &Vec<TestCaseResults>) -> bool {
             TestCaseStatus::UNKNOWN => unknown += 1,
         }
         let formatted_message: String = match stat.status {
-            TestCaseStatus::PASSED => format!("{}", stat.criteria),
-            TestCaseStatus::FAILED => format!("{}", stat.criteria),
-            TestCaseStatus::SKIPPED => format!("{}", stat.criteria),
-            TestCaseStatus::UNKNOWN => format!("{}", stat.criteria),
+            TestCaseStatus::PASSED => format!("{}", Green.paint(stat.criteria)),
+            TestCaseStatus::FAILED => format!("{}", Red.paint(stat.criteria)),
+            TestCaseStatus::SKIPPED => format!("{}", Yellow.paint(stat.criteria)),
+            TestCaseStatus::UNKNOWN => format!("{}", Yellow.paint(stat.criteria)),
         };
         total_count += 1;
         total_duration += stat.duration;
