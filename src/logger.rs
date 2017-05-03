@@ -1,5 +1,6 @@
 use chrono::prelude::Local;
 use ansi_term::Colour::{Green, Red, Cyan, Yellow, Purple};
+
 pub enum LogType {
     PASS,
     FAIL,
