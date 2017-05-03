@@ -29,36 +29,49 @@ pub struct TestCaseResults {
     duration: i32,
     status: TestCaseStatus,
 }
-pub fn run_test(test: TestCase) -> Vec<TestCaseResults> {
-    println!("Test: {} ({})", test.title, test.criteria);
-    let mut logger: Logger = Logger::new();
-    let starting_time: i32 = time::now().tm_nsec;
-    let status: TestCaseStatus = (test.exec)(&mut logger);
-    let ending_time: i32 = time::now().tm_nsec;
-    let mark: &str = match status {
-        TestCaseStatus::PASSED => "✅",
-        TestCaseStatus::FAILED => "❌",
-        TestCaseStatus::SKIPPED => "❗",
-        TestCaseStatus::UNKNOWN => "⁉️",
-    };
-    println!("{} ... {}", test.criteria, mark);
-    vec![TestCaseResults {
-             title: test.title,
-             criteria: test.criteria,
-             duration: (ending_time - starting_time) / 1000,
-             status: status,
-         }]
+pub struct TestRunner {
+    attributes: i32,
 }
-pub fn run_tests(tests: Vec<TestCase>) -> Vec<TestCaseResults> {
-    let mut results: Vec<TestCaseResults> = vec![];
-    for test in tests {
-        for item in run_test(test) {
-            results.push(item);
-        }
+impl TestRunner {
+    pub fn new(attributes: i32) -> TestRunner {
+        TestRunner { attributes: attributes }
     }
-    return results;
+    pub fn run_test(&mut self, test: TestCase) -> Vec<TestCaseResults> {
+        println!("Test: {} ({})", test.title, test.criteria);
+        let mut logger: Logger = Logger::new();
+        let starting_time: i32 = time::now().tm_nsec;
+        let status: TestCaseStatus = (test.exec)(&mut logger);
+        let ending_time: i32 = time::now().tm_nsec;
+        let mark: &str = match status {
+            TestCaseStatus::PASSED => "✅",
+            TestCaseStatus::FAILED => "❌",
+            TestCaseStatus::SKIPPED => "❗",
+            TestCaseStatus::UNKNOWN => "⁉️",
+        };
+        println!("{} ... {}", test.criteria, mark);
+        vec![TestCaseResults {
+                 title: test.title,
+                 criteria: test.criteria,
+                 duration: (ending_time - starting_time) / 1000,
+                 status: status,
+             }]
+    }
+    pub fn run_tests(&mut self, tests: Vec<TestCase>) -> Vec<TestCaseResults> {
+        let mut results: Vec<TestCaseResults> = vec![];
+        for test in tests {
+            for item in self.run_test(test) {
+                results.push(item);
+            }
+        }
+        return results;
+    }
 }
-pub trait Testable {
+impl Drop for TestRunner {
+    fn drop(&mut self) {
+        // TODO: Implement
+    }
+}
+/*pub trait Testable {
     fn tests(self) -> Vec<TestCase>;
 }
 pub fn run_tests_from_class<T: Testable>(test_class: T) -> Vec<TestCaseResults> {
@@ -67,7 +80,7 @@ pub fn run_tests_from_class<T: Testable>(test_class: T) -> Vec<TestCaseResults> 
 pub fn run_tests_from_classes<T: Testable>() -> Vec<TestCaseResults> {
     // TODO: Implement
     return Vec::new();
-}
+}*/
 pub fn statify(stats: &Vec<TestCaseResults>) -> bool {
     let (mut total_count, mut total_duration): (i32, i32) = (0, 0);
     let (mut pass, mut fail, mut skip, mut unknown): (i32, i32, i32, i32) = (0, 0, 0, 0);
