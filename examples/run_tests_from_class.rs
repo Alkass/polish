@@ -1,6 +1,6 @@
 extern crate polish;
 
-use polish::test_case::{TestRunner, TestCaseStatus, TestCase, Testable, statify};
+use polish::test_case::{TestRunner, TestCaseStatus, TestCase, Testable};
 use polish::logger::Logger;
 
 fn main() {
@@ -21,6 +21,5 @@ fn main() {
                                         }))]
         }
     }
-    let res = TestRunner::get_instance(0).run_tests_from_class(MyTestCase {});
-    statify(&res);
+    TestRunner::get_instance(0).run_tests_from_class(MyTestCase {});
 }
