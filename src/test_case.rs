@@ -1,4 +1,5 @@
 use time;
+use ansi_term::Colour::{Green, Red, Yellow};
 use logger::Logger;
 pub enum TestCaseStatus {
     PASSED,
@@ -93,10 +94,10 @@ pub fn statify(stats: &Vec<TestCaseResults>) -> bool {
             TestCaseStatus::UNKNOWN => unknown += 1,
         }
         let formatted_message: String = match stat.status {
-            TestCaseStatus::PASSED => format!("{}", stat.criteria),
-            TestCaseStatus::FAILED => format!("{}", stat.criteria),
-            TestCaseStatus::SKIPPED => format!("{}", stat.criteria),
-            TestCaseStatus::UNKNOWN => format!("{}", stat.criteria),
+            TestCaseStatus::PASSED => format!("{}", Green.paint(stat.criteria)),
+            TestCaseStatus::FAILED => format!("{}", Red.paint(stat.criteria)),
+            TestCaseStatus::SKIPPED => format!("{}", Yellow.paint(stat.criteria)),
+            TestCaseStatus::UNKNOWN => format!("{}", Yellow.paint(stat.criteria)),
         };
         total_count += 1;
         total_duration += stat.duration;
