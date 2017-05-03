@@ -2,7 +2,6 @@ use time;
 use ansi_term::Colour::{Green, Red, Yellow};
 use logger::Logger;
 
-#[derive(Debug)]
 pub enum TestCaseStatus {
     PASSED,
     FAILED,
@@ -26,8 +25,6 @@ impl TestCase {
         }
     }
 }
-
-#[derive(Debug)]
 pub struct TestCaseResults {
     title: &'static str,
     criteria: &'static str,
