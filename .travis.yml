@@ -11,4 +11,4 @@ matrix:
   - rust: nightly
 script:
 - cargo build --release
-- for example in examples/*; do echo $example && cp $example src/main.rs && cargo run; done
+- sh scripts/test.sh
