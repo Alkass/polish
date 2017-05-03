@@ -30,11 +30,14 @@ pub struct TestCaseResults {
     duration: i32,
     status: TestCaseStatus,
 }
+pub trait Testable {
+    fn tests(self) -> Vec<TestCase>;
+}
 pub struct TestRunner {
     attributes: i32,
 }
 impl TestRunner {
-    pub fn new(attributes: i32) -> TestRunner {
+    pub fn get_instance(attributes: i32) -> TestRunner {
         TestRunner { attributes: attributes }
     }
     pub fn run_test(&mut self, test: TestCase) -> Vec<TestCaseResults> {
@@ -66,22 +69,19 @@ impl TestRunner {
         }
         return results;
     }
+    pub fn run_tests_from_class<T: Testable>(&mut self, test_class: T) -> Vec<TestCaseResults> {
+        return self.run_tests(test_class.tests());
+    }
 }
 impl Drop for TestRunner {
     fn drop(&mut self) {
         // TODO: Implement
     }
 }
-/*pub trait Testable {
-    fn tests(self) -> Vec<TestCase>;
-}
-pub fn run_tests_from_class<T: Testable>(test_class: T) -> Vec<TestCaseResults> {
-    return run_tests(test_class.tests());
-}
 pub fn run_tests_from_classes<T: Testable>() -> Vec<TestCaseResults> {
     // TODO: Implement
     return Vec::new();
-}*/
+}
 pub fn statify(stats: &Vec<TestCaseResults>) -> bool {
     let (mut total_count, mut total_duration): (i32, i32) = (0, 0);
     let (mut pass, mut fail, mut skip, mut unknown): (i32, i32, i32, i32) = (0, 0, 0, 0);
