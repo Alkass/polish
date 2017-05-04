@@ -6,8 +6,9 @@ pub enum TestCaseStatus {
     PASSED,
     FAILED,
     SKIPPED,
-    UNKNOWN,
+    UNKNOWN
 }
+
 pub struct TestCase {
     pub title: &'static str,
     pub criteria: &'static str,
@@ -25,28 +26,32 @@ impl TestCase {
         }
     }
 }
+
 pub struct TestCaseResults {
     title: &'static str,
     criteria: &'static str,
     duration: i32,
     status: TestCaseStatus,
 }
+
 pub trait Testable {
     fn tests(self) -> Vec<TestCase>;
 }
+
+#[allow(dead_code)]
 pub struct TestRunner {
-    attributes: i32,
+    attributes: i64,
     results: Vec<TestCaseResults>
 }
 impl TestRunner {
-    pub fn get_instance(attributes: i32) -> TestRunner {
+    pub fn get_instance(attributes: i64) -> TestRunner {
         TestRunner {
             attributes: attributes,
             results: vec![]
         }
     }
     pub fn run_test(&mut self, test: TestCase) {
-        println!("Test: {} ({})", test.title, test.criteria);
+        println!("Running {} ({})", test.title, test.criteria);
         let mut logger: Logger = Logger::new();
         let starting_time: i32 = time::now().tm_nsec;
         let status: TestCaseStatus = (test.exec)(&mut logger);
@@ -81,34 +86,35 @@ impl Drop for TestRunner {
     fn drop(&mut self) {
         let (mut total_count, mut total_duration): (i32, i32) = (0, 0);
         let (mut pass, mut fail, mut skip, mut unknown): (i32, i32, i32, i32) = (0, 0, 0, 0);
-        println!("\n--\n");
+        print!("\n");
         for stat in self.results.iter() {
             match stat.status {
                 TestCaseStatus::PASSED => pass += 1,
                 TestCaseStatus::FAILED => fail += 1,
                 TestCaseStatus::SKIPPED => skip += 1,
-                TestCaseStatus::UNKNOWN => unknown += 1 
+                TestCaseStatus::UNKNOWN => unknown += 1
             }
-            let formatted_message: String = match stat.status {
-                TestCaseStatus::PASSED => format!("{}", Green.paint(stat.criteria)),
-                TestCaseStatus::FAILED => format!("{}", Red.paint(stat.criteria)),
-                TestCaseStatus::SKIPPED => format!("{}", Yellow.paint(stat.criteria)),
-                TestCaseStatus::UNKNOWN => format!("{}", Yellow.paint(stat.criteria)),
+            let color = match stat.status {
+                TestCaseStatus::PASSED => Green,
+                TestCaseStatus::FAILED => Red,
+                TestCaseStatus::SKIPPED => Yellow,
+                TestCaseStatus::UNKNOWN => Yellow
             };
             total_count += 1;
             total_duration += stat.duration;
-            println!("{} ({} nanosecond(s)): {}",
+            let formatted_text = color.paint(format!("{} ({}) ... {}ns",
                 stat.title,
-                stat.duration,
-                formatted_message);
-            println!("\nRan {} Test Case(s) in {} nanosecond(s)",
-                total_count,
-                total_duration);
-            println!("{} Passed  {} Failed  {} Skipped  {} Unknown",
-                pass,
-                fail,
-                skip,
-                unknown); 
+                stat.criteria,
+                stat.duration));
+            println!("{}", formatted_text);
         }
+        println!("\nRan {} test case(s) in {} ns",
+            total_count,
+            total_duration);
+        let formatted_pass = Green.paint(format!("{} Passed", pass));
+        let formatted_failed = Red.paint(format!("{} Failed", fail));
+        let formatted_skipped = Yellow.paint(format!("{} Skipped", skip));
+        let formatted_unknown = Yellow.paint(format!("{} Unknown", unknown));
+        println!("{}  {}  {}  {}", formatted_pass, formatted_failed, formatted_skipped, formatted_unknown);
     }
 }
