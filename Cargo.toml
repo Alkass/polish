@@ -9,7 +9,6 @@ repository = "https://github.com/AlKass/polish"
 readme = "README.md"
 keywords = ["Rust", "Testing", "Test-Driven"]
 categories = ["development-tools::testing"]
-license = "MIT"
 license-file = "License.md"
 
 [badges]
