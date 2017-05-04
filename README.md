@@ -7,22 +7,22 @@
 </div>
 
 # Polish
-
-`Polish` is a mini testing framework for the `Rust` system programming language that allows the writing of test-driven applications in a unified and expressive manner.
+`Polish` is a `Rust` test frammework designed to allow the construction of test-driven development processes.
 
 ## Getting Started
-
-Add the following under `[dependencies]` inside your project's `Cargo.toml` file:
+The `crates.io` package is kept up-to-date with all the major changes which means you can use the package by including the following in your `Cargo.toml` under your `dependencies` section:
 
 ```yaml
 polish = "*"
 ```
 
-Or use the following if you'd like to use nightly releases:
+But if you'd like to use nightly (most recent) releases, you can include the `GitHub` package repo instead:
 
 ```yaml
 polish = { git = "https://github.com/alkass/polish", branch = "master" }
 ```
+
+.........
 
 At minimum, you'll need the following:
 
