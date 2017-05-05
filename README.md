@@ -72,7 +72,56 @@ fn main() {
 > The example listed above is available [here](examples/run_test_closure.rs)
 
 #### Multiple Test Cases
-...
+You can run multiple test cases as follows:
+
+```rust
+extern crate polish;
+
+use polish::test_case::{TestRunner, TestCaseStatus, TestCase};
+use polish::logger::Logger;
+
+fn main() {
+  let mut runner = TestRunner::new(0);
+  runner.run_test(TestCase::new("1st Test Case Title", "Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+    // TODO: Your test case code goes here
+    TestCaseStatus::PASSED
+  })));
+  runner.run_test(TestCase::new("2nd Test Case Title", "Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+    // TODO: Your test case code goes here
+    TestCaseStatus::PASSED
+  })));
+  runner.run_test(TestCase::new("3rd Test Case Title", "Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+    // TODO: Your test case code goes here
+    TestCaseStatus::PASSED
+  })));
+}
+```
+
+But a more convenient way would be to pass a `Vector` of your test cases to `run_tests` as so:
+
+```rust
+extern crate polish;
+
+use polish::test_case::{TestRunner, TestCaseStatus, TestCase};
+use polish::logger::Logger;
+
+fn main() {
+    let my_tests = vec![
+      TestCase::new("1st Test Case Title", "1st Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+        // TODO: Your test case goes here
+        TestCaseStatus::PASSED
+      })),
+      TestCase::new("2nd Test Case Title", "2nd Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+        // TODO: Your test case goes here
+        TestCaseStatus::UNKNOWN
+      })),
+      TestCase::new("3rd Test Case Title", "3rd Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+        // TODO: Your test case goes here
+        TestCaseStatus::FAILED
+      }))];
+    TestRunner::new(0).run_tests(my_tests);
+}
+```
 
 #### Embedded Test Cases
 ...
