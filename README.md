@@ -126,6 +126,10 @@ fn main() {
 #### Embedded Test Cases
 ...
 
+
+### Attributes
+...
+
 ### Logging
 The logger object that's passed to each test case offers 4 logging functions (`pass`, `fail`, `warn`, and `info`). Each of these functions take a `message` argument of type `String` which allows you to use the `format!` macro to format your logs, e.g.:
 
