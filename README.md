@@ -44,6 +44,8 @@ fn main() {
 }
 ```
 
+> The example listed above is available [here](examples/run_test.rs)
+
 You can also pass a `Rust closure` instead of a function pointer as so:
 
 ```rust
@@ -60,6 +62,8 @@ fn main() {
   TestRunner::new(0).run_test(test_case);
 }
 ```
+
+> The example listed above is available [here](examples/run_test_closure.rs)
 
 ## Author
 [Fadi Hanna Al-Kass](https://github.com/alkass)
