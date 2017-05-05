@@ -21,5 +21,5 @@ fn main() {
                                         }))]
         }
     }
-    TestRunner::get_instance(0).run_tests_from_class(MyTestCase {});
+    TestRunner::new(0).run_tests_from_class(MyTestCase {});
 }
