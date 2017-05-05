@@ -4,6 +4,7 @@ use polish::test_case::{TestRunner, TestCaseStatus, TestCase};
 use polish::logger::Logger;
 
 fn my_test_case(logger: &mut Logger) -> TestCaseStatus {
+    // TODO: Your test case code goes here
     TestCaseStatus::PASSED
 }
 
