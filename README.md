@@ -126,8 +126,11 @@ fn main() {
 #### Embedded Test Cases
 ...
 
-
 ### Attributes
+Attributes allow you to change the behaviour of how your test cases are run. For instance, by default, your `TestRunner` instance will run all your test cases regardless of whether any have failed. If you, however, want this behaviour changed, you will need to specifically tell your `TestRunner` instance to stop the process at the first failure.
+
+The value you pass to `TestRunner::new()` as a function argument indicates the behaviour of your process.
+
 ...
 
 ### Logging
