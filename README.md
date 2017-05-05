@@ -25,6 +25,8 @@ polish = { git = "https://github.com/alkass/polish", branch = "master" }
 ```
 
 ### Writing Test Cases
+
+#### single Test Cases
 The simplest test case can take the following form:
 
 ```rust
@@ -43,6 +45,10 @@ fn main() {
   TestRunner::new(0).run_test(test_case);
 }
 ```
+
+This produces the following:
+
+<img src="screenshots/run_test.png" />
 
 > The example listed above is available [here](examples/run_test.rs)
 
@@ -64,6 +70,12 @@ fn main() {
 ```
 
 > The example listed above is available [here](examples/run_test_closure.rs)
+
+#### Multiple Test Cases
+...
+
+#### Embedded Test Cases
+...
 
 ### Logging
 The logger object that's passed to each test case offers 4 logging functions (`pass`, `fail`, `warn`, and `info`). Each of these functions take a `message` argument of type `String` which allows you to use the `format!` macro to format your logs, e.g.:
