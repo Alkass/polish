@@ -124,6 +124,12 @@ fn main() {
 }
 ```
 
+This produces the following:
+
+<img src="screenshots/run_tests.png" />
+
+> The example listed above is available [here](examples/run_tests.rs)
+
 #### Embedded Test Cases
 You may choose to have a set of test cases as part of an object to test that object itself. For that, a clean way of writing your test cases would be to implement the `Testable` trait. Following is an example:
 
@@ -152,6 +158,10 @@ fn main() {
   TestRunner::new(0).run_tests_from_class(MyTestCase {});
 }
 ```
+
+This produces the following:
+
+<img src="screenshots/run_test.png" />
 
 > The example listed above is available [here](examples/run_tests_from_class.rs)
 
