@@ -6,7 +6,7 @@ use polish::logger::Logger;
 fn main() {
     let test_case = TestCase::new("Test Case Title",
                                   "Test Case Criteria",
-                                  Box::new(|logger: &mut Logger| -> TestCaseStatus {
+                                  Box::new(|_: &mut Logger| -> TestCaseStatus {
                                                // TODO: Your test case code goes here
                                                TestCaseStatus::PASSED
                                            }));

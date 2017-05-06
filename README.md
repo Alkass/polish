@@ -153,6 +153,8 @@ fn main() {
 }
 ```
 
+> The example listed above is available [here](examples/run_tests_from_class.rs)
+
 ### Attributes
 Attributes allow you to change the behaviour of how your test cases are run. For instance, by default, your `TestRunner` instance will run all your test cases regardless of whether any have failed. If you, however, want this behaviour changed, you will need to specifically tell your `TestRunner` instance to stop the process at the first failure.
 

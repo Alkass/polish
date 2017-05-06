@@ -22,7 +22,7 @@ impl Logger {
             _info: 0,
         }
     }
-    pub fn log(&mut self, log_type: LogType, message: String) {
+    fn log(&mut self, log_type: LogType, message: String) {
         let mark: _ = match log_type {
             LogType::PASS => {
                 self._pass += 1;

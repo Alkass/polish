@@ -54,8 +54,20 @@ impl TestRunner {
         println!("Running {} ({})", test.title, test.criteria);
         let mut logger: Logger = Logger::new();
         let starting_time: i32 = time::now().tm_nsec;
-        let status: TestCaseStatus = (test.exec)(&mut logger);
+        let mut status: TestCaseStatus = (test.exec)(&mut logger);
         let ending_time: i32 = time::now().tm_nsec;
+        match status {
+            TestCaseStatus::PASSED => {}
+            TestCaseStatus::FAILED => {}
+            TestCaseStatus::SKIPPED => {}
+            TestCaseStatus::UNKNOWN => {
+                if logger.get_num_fail() > 0 {
+                    status = TestCaseStatus::FAILED;
+                } else {
+                    status = TestCaseStatus::PASSED;
+                }
+            }
+        }
         let mark: &str = match status {
             TestCaseStatus::PASSED => "✅",
             TestCaseStatus::FAILED => "❌",

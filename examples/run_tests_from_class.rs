@@ -9,14 +9,12 @@ fn main() {
         fn tests(self) -> Vec<TestCase> {
             vec![TestCase::new("Some Title #1",
                                "Testing Criteria",
-                               Box::new(|logger: &mut Logger| -> TestCaseStatus {
-                                            logger.pass(format!("Good to go"));
+                               Box::new(|_: &mut Logger| -> TestCaseStatus {
                                             TestCaseStatus::PASSED
                                         })),
                  TestCase::new("Some Title #2",
                                "Testing Criteria",
-                               Box::new(|logger: &mut Logger| -> TestCaseStatus {
-                                            logger.info(format!("Skipping this one"));
+                               Box::new(|_: &mut Logger| -> TestCaseStatus {
                                             TestCaseStatus::SKIPPED
                                         }))]
         }
