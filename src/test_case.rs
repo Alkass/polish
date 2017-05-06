@@ -119,7 +119,7 @@ impl Drop for TestRunner {
                 color.paint(format!("{} ({}) ... {}ns", stat.title, stat.criteria, stat.duration));
             println!("{}", formatted_text);
         }
-        println!("\nRan {} test case(s) in {} ns",
+        println!("\nRan {} test(s) in {}ns",
                  total_count,
                  total_duration);
         let formatted_pass = Green.paint(format!("{} Passed", pass));
