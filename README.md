@@ -1,17 +1,17 @@
-[![Build Status](https://travis-ci.org/AlKass/polish.svg?branch=master)](https://travis-ci.org/AlKass/polish)
-[![Crates Package Status](https://img.shields.io/crates/v/polish.svg)](https://crates.io/crates/polish)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/AlKass/polish/blob/master/License.md)
+[![Build Status](https://travis-ci.org/AlKass/polish.svg?branch=master)](https://travis-ci.org/AlKass/polish) [![Crates Package Status](https://img.shields.io/crates/v/polish.svg)](https://crates.io/crates/polish) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/AlKass/polish/blob/master/License.md)
 
 <div align="center">
-  <img src="logo.png" />
+  <img src="logo.png">
 </div>
 
 # Polish
+
 `Polish` is a test framework designed to allow the construction of test-driven development processes written in `Rust`.
 
 ## Getting Started
 
 ### Installing the Package
+
 The `crates.io` package is kept up-to-date with all the major changes which means you can use it by simply including the following in your `Cargo.toml` under your `dependencies` section:
 
 ```yaml
@@ -49,7 +49,7 @@ fn main() {
 
 This produces the following:
 
-<img src="screenshots/run_test.png" />
+![](screenshots/run_test.png)
 
 > The example listed above is available [here](examples/run_test.rs)
 
@@ -73,6 +73,7 @@ fn main() {
 > The example listed above is available [here](examples/run_test_closure.rs)
 
 #### Multiple Test Cases
+
 You can run multiple test cases as follows:
 
 ```rust
@@ -126,11 +127,12 @@ fn main() {
 
 This produces the following:
 
-<img src="screenshots/run_tests.png" />
+![](screenshots/run_tests.png)
 
 > The example listed above is available [here](examples/run_tests.rs)
 
 #### Embedded Test Cases
+
 You may choose to have a set of test cases as part of an object to test that object itself. For that, a clean way of writing your test cases would be to implement the `Testable` trait. Following is an example:
 
 ```rust
@@ -161,11 +163,12 @@ fn main() {
 
 This produces the following:
 
-<img src="screenshots/run_tests.png" />
+![](screenshots/run_tests_from_class.png)
 
 > The example listed above is available [here](examples/run_tests_from_class.rs)
 
 ### Attributes
+
 Attributes allow you to change the behaviour of how your test cases are run. For instance, by default, your `TestRunner` instance will run all your test cases regardless of whether any have failed. If you, however, want this behaviour changed, you will need to specifically tell your `TestRunner` instance to stop the process at the first failure.
 
 The value you pass to `TestRunner::new()` as a function argument indicates the behaviour of your process.
@@ -173,6 +176,7 @@ The value you pass to `TestRunner::new()` as a function argument indicates the b
 THIS FEATURE IS A WORK-IN-PROGRESS. THIS DOCUMENT WILL BE UPDATED WITH TECHNICAL DETAILS ONCE THE FEATURE IS COMPLETE.
 
 ### Logging
+
 The logger object that's passed to each test case offers 4 logging functions (`pass`, `fail`, `warn`, and `info`). Each of these functions take a `message` argument of type `String` which allows you to use the `format!` macro to format your logs, e.g.:
 
 ```rust
@@ -182,4 +186,5 @@ logger.info(format!("{} + {} = {sum}", 1, 2, sum=(1 + 2)));
 > If your test case return status is `UNKNOWN` and you've printed at least one `fail` log from within the test case function, your test case result will be marked as `FAILED`. Otherwise, your test case will be marked as `PASSED`.
 
 ## Author
+
 [Fadi Hanna Al-Kass](https://github.com/alkass)
