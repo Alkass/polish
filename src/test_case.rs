@@ -98,20 +98,20 @@ impl TestRunner {
 impl Drop for TestRunner {
     fn drop(&mut self) {
         let (mut total_count, mut total_duration): (i32, i32) = (0, 0);
-        let (mut pass, mut fail, mut skip, mut unknown): (i32, i32, i32, i32) = (0, 0, 0, 0);
+        let (mut pass, mut fail, mut skip): (i32, i32, i32) = (0, 0, 0);
         print!("\n");
         for stat in self.results.iter() {
             match stat.status {
                 TestCaseStatus::PASSED => pass += 1,
                 TestCaseStatus::FAILED => fail += 1,
                 TestCaseStatus::SKIPPED => skip += 1,
-                TestCaseStatus::UNKNOWN => unknown += 1,
+                _ => {}
             }
             let color = match stat.status {
                 TestCaseStatus::PASSED => Green,
                 TestCaseStatus::FAILED => Red,
                 TestCaseStatus::SKIPPED => Yellow,
-                TestCaseStatus::UNKNOWN => Yellow,
+                _ => Yellow,
             };
             total_count += 1;
             total_duration += stat.duration;
@@ -125,11 +125,9 @@ impl Drop for TestRunner {
         let formatted_pass = Green.paint(format!("{} Passed", pass));
         let formatted_failed = Red.paint(format!("{} Failed", fail));
         let formatted_skipped = Yellow.paint(format!("{} Skipped", skip));
-        let formatted_unknown = Yellow.paint(format!("{} Unknown", unknown));
-        println!("{}  {}  {}  {}",
+        println!("{}  {}  {}",
                  formatted_pass,
                  formatted_failed,
-                 formatted_skipped,
-                 formatted_unknown);
+                 formatted_skipped);
     }
 }
