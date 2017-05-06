@@ -7,7 +7,7 @@
 </div>
 
 # Polish
-`Polish` is a test frammework designed to allow the construction of test-driven development processes written in `Rust`.
+`Polish` is a test framework designed to allow the construction of test-driven development processes written in `Rust`.
 
 ## Getting Started
 
@@ -170,7 +170,7 @@ Attributes allow you to change the behaviour of how your test cases are run. For
 
 The value you pass to `TestRunner::new()` as a function argument indicates the behaviour of your process.
 
-...
+THIS FEATURE IS A WORK-IN-PROGRESS. THIS DOCUMENT WILL BE UPDATED WITH TECHNICAL DETAILS ONCE THE FEATURE IS COMPLETE.
 
 ### Logging
 The logger object that's passed to each test case offers 4 logging functions (`pass`, `fail`, `warn`, and `info`). Each of these functions take a `message` argument of type `String` which allows you to use the `format!` macro to format your logs, e.g.:
