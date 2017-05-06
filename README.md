@@ -148,7 +148,7 @@ impl Testable for MyTestCase {
 }
 
 fn main() {
-TestRunner::new(0).run_tests_from_class(MyTestCase {});
+  TestRunner::new(0).run_tests_from_class(MyTestCase {});
 }
 ```
 
