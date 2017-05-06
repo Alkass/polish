@@ -23,7 +23,7 @@ impl Logger {
         }
     }
     fn log(&mut self, log_type: LogType, message: String) {
-        let mark: _ = match log_type {
+        let mark = match log_type {
             LogType::PASS => {
                 self._pass += 1;
                 Green.paint("PASS")
@@ -41,9 +41,9 @@ impl Logger {
                 Yellow.paint("WARN")
             }
         };
-        println!("{} - {}: {}",
+        println!("{} {}: {}",
+                 Purple.paint(Local::now().format("%Y-%m-%d %H:%M:%S").to_string()),
                  mark,
-                 Purple.paint(Local::now().date().to_string()),
                  message);
     }
     pub fn pass(&mut self, message: String) {
