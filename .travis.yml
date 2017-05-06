@@ -11,4 +11,4 @@ matrix:
   - rust: nightly
 script:
 - cargo build --release
-- sh scripts/test.sh
+- make test
