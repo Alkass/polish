@@ -124,7 +124,33 @@ fn main() {
 ```
 
 #### Embedded Test Cases
-...
+You may choose to have a set of test cases as part of an object to test that object itself. For that, a clean way of writing your test cases would be to implement the `Testable` trait. Following is an example:
+
+```rust
+extern crate polish;
+
+use polish::test_case::{TestRunner, TestCaseStatus, TestCase, Testable};
+use polish::logger::Logger;
+
+struct MyTestCase;
+impl Testable for MyTestCase {
+  fn tests(self) -> Vec<TestCase> {
+    vec![
+      TestCase::new("Some Title #1", "Testing Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+        // TODO: Your test case goes here
+        TestCaseStatus::PASSED
+      })),
+      TestCase::new("Some Title #2", "Testing Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
+      // TODO: Your test case goes here
+      TestCaseStatus::SKIPPED
+    }))]
+  }
+}
+
+fn main() {
+TestRunner::new(0).run_tests_from_class(MyTestCase {});
+}
+```
 
 ### Attributes
 Attributes allow you to change the behaviour of how your test cases are run. For instance, by default, your `TestRunner` instance will run all your test cases regardless of whether any have failed. If you, however, want this behaviour changed, you will need to specifically tell your `TestRunner` instance to stop the process at the first failure.
