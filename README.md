@@ -180,8 +180,15 @@ THIS FEATURE IS A WORK-IN-PROGRESS. THIS DOCUMENT WILL BE UPDATED WITH TECHNICAL
 The logger object that's passed to each test case offers 4 logging functions (`pass`, `fail`, `warn`, and `info`). Each of these functions take a `message` argument of type `String` which allows you to use the `format!` macro to format your logs, e.g.:
 
 ```rust
-logger.info(format!("{} + {} = {sum}", 1, 2, sum=(1 + 2)));
+logger.info(format!("{} + {} = {}", 1, 2, 1 + 2));
+logger.pass(format!("{id}: {message}", id = "alkass", message = "this is a message"));
+logger.warn(format!("about to fail"));
+logger.fail(format!("failed with err_code: {code}", code = -1));
 ```
+
+This produces the following:
+
+<img src="screenshots/logs.png" />
 
 > If your test case return status is `UNKNOWN` and you've printed at least one `fail` log from within the test case function, your test case result will be marked as `FAILED`. Otherwise, your test case will be marked as `PASSED`.
 
