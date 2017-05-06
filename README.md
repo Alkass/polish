@@ -161,7 +161,7 @@ fn main() {
 
 This produces the following:
 
-<img src="screenshots/run_test.png" />
+<img src="screenshots/run_tests.png" />
 
 > The example listed above is available [here](examples/run_tests_from_class.rs)
 
