@@ -27,6 +27,7 @@ polish = { git = "https://github.com/alkass/polish", branch = "master" }
 ### Writing Test Cases
 
 #### single Test Cases
+
 The simplest test case can take the following form:
 
 ```rust
@@ -165,6 +166,8 @@ The logger object that's passed to each test case offers 4 logging functions (`p
 ```rust
 logger.info(format!("{} + {} = {sum}", 1, 2, sum=(1 + 2)));
 ```
+
+> If your test case return status is `UNKNOWN` and you've printed at least one `fail` log from within the test case function, your test case result will be marked as `FAILED`. Otherwise, your test case will be marked as `PASSED`.
 
 ## Author
 [Fadi Hanna Al-Kass](https://github.com/alkass)
