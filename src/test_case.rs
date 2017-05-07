@@ -1,4 +1,5 @@
 use time;
+use chrono::prelude::Local;
 use ansi_term::Colour::{Green, Red, Yellow};
 use logger::Logger;
 
@@ -51,7 +52,10 @@ impl TestRunner {
         }
     }
     pub fn run_test(&mut self, test: TestCase) {
-        println!("Running {} ({})", test.title, test.criteria);
+        println!("Starting {} at {} on {}",
+                 test.title,
+                 Local::now().format("%H:%M:%S").to_string(),
+                 Local::now().format("%Y-%m-%d").to_string());
         let mut logger: Logger = Logger::new();
         let starting_time: i32 = time::now().tm_nsec;
         let mut status: TestCaseStatus = (test.exec)(&mut logger);
