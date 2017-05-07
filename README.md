@@ -188,7 +188,9 @@ logger.fail(format!("failed with err_code: {code}", code = -1));
 
 This produces the following:
 
-<img src="screenshots/logs.png" />
+![](screenshots/logs.png)
+
+> The example listed above is available [here](examples/logs.rs)
 
 > If your test case return status is `UNKNOWN` and you've printed at least one `fail` log from within the test case function, your test case result will be marked as `FAILED`. Otherwise, your test case will be marked as `PASSED`.
 
