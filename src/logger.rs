@@ -73,10 +73,14 @@ impl Logger {
 }
 impl Drop for Logger {
     fn drop(&mut self) {
-        println!("{} PASS  {} FAIL  {} WARN  {} INFO",
-                 self.get_num_pass(),
-                 self.get_num_fail(),
-                 self.get_num_warn(),
-                 self.get_num_info());
+        let formatted_pass = format!("{} {}", self.get_num_pass(), Green.paint("PASS"));
+        let formatted_fail = format!("{} {}", self.get_num_fail(), Red.paint("PASS"));
+        let formatted_warn = format!("{} {}", self.get_num_warn(), Yellow.paint("PASS"));
+        let formatted_info = format!("{} {}", self.get_num_info(), Cyan.paint("PASS"));
+        println!("{}  {}  {}  {}",
+                 formatted_pass,
+                 formatted_fail,
+                 formatted_warn,
+                 formatted_info);
     }
 }

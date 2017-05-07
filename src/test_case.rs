@@ -68,13 +68,19 @@ impl TestRunner {
                 }
             }
         }
-        let mark: &str = match status {
+        let mark = match status {
             TestCaseStatus::PASSED => "✅",
             TestCaseStatus::FAILED => "❌",
             TestCaseStatus::SKIPPED => "❗",
-            TestCaseStatus::UNKNOWN => "⁉️",
+            TestCaseStatus::UNKNOWN => "",
         };
-        println!("{} ... {}", test.criteria, mark);
+        let formatted_criteria = match status {
+            TestCaseStatus::PASSED => Green.paint(test.criteria),
+            TestCaseStatus::FAILED => Red.paint(test.criteria),
+            TestCaseStatus::SKIPPED => Yellow.paint(test.criteria),
+            TestCaseStatus::UNKNOWN => Yellow.paint(test.criteria),
+        };
+        println!("{} ... {}", formatted_criteria, mark);
         self.results
             .push(TestCaseResults {
                       title: test.title,
@@ -119,9 +125,7 @@ impl Drop for TestRunner {
                 color.paint(format!("{} ({}) ... {}ns", stat.title, stat.criteria, stat.duration));
             println!("{}", formatted_text);
         }
-        println!("\nRan {} test(s) in {}ns",
-                 total_count,
-                 total_duration);
+        println!("\nRan {} test(s) in {}ns", total_count, total_duration);
         let formatted_pass = Green.paint(format!("{} Passed", pass));
         let formatted_failed = Red.paint(format!("{} Failed", fail));
         let formatted_skipped = Yellow.paint(format!("{} Skipped", skip));
