@@ -40,6 +40,17 @@ pub trait Testable {
 }
 
 #[allow(dead_code)]
+pub struct TestRunnerAttributes {
+    pub drop_after_first_failure: i64,
+    // more attributes can be added here
+}
+
+pub static TEST_RUNNER_ATTRIBUTES: TestRunnerAttributes = TestRunnerAttributes {
+    drop_after_first_failure: 0x0000000000000001,
+        // attribute values need to be assigned here if new attributes are added to TestRunnerAttributes
+};
+
+#[allow(dead_code)]
 pub struct TestRunner {
     attributes: i64,
     results: Vec<TestCaseResults>,
@@ -50,6 +61,13 @@ impl TestRunner {
             attributes: 0,
             results: vec![],
         }
+    }
+    pub fn set_attribute(&mut self, attribute: i64) {
+
+        self.attributes |= attribute;
+    }
+    pub fn set_attributes(&mut self, attributes: i64) {
+        self.attributes = attributes;
     }
     pub fn run_test(&mut self, test: TestCase) {
         println!("Starting {} at {} on {}",
@@ -105,9 +123,9 @@ impl TestRunner {
     pub fn run_tests_from_class<T: Testable>(&mut self, test_class: T) {
         self.run_tests(test_class.tests());
     }
-    pub fn run_tests_from_classes<T: Testable>(&mut self) {
+    /*pub fn run_tests_from_classes<T: Testable>(&mut self) {
         // TODO: Implement
-    }
+    }*/
 }
 impl Drop for TestRunner {
     fn drop(&mut self) {
