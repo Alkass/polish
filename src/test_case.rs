@@ -74,7 +74,7 @@ impl TestRunner {
     pub fn has_attribute(&self, attribute: i64) -> bool {
         self.attributes & attribute == attribute
     }
-    pub fn run_test(&mut self, test: TestCase) {
+    pub fn run_test(&mut self, test: TestCase) -> bool {
         println!("Starting {} at {} on {}",
                  test.title,
                  Local::now().format("%H:%M:%S").to_string(),
@@ -112,21 +112,25 @@ impl TestRunner {
             TestCaseStatus::UNKNOWN => Yellow.paint(test.criteria),
         };
         println!("{} ... {}", formatted_criteria, mark);
-        self.results
-            .push(TestCaseResults {
-                      title: test.title,
-                      criteria: test.criteria,
-                      duration: (ending_time - starting_time) / 1000,
-                      status: status,
-                  })
+        let test_info: TestCaseResults = TestCaseResults {
+            title: test.title,
+            criteria: test.criteria,
+            duration: (ending_time - starting_time) / 1000,
+            status: status,
+        };
+        self.results.push(test_info);
+        return true; // TODO: implement
     }
-    pub fn run_tests(&mut self, tests: Vec<TestCase>) {
+    pub fn run_tests(&mut self, tests: Vec<TestCase>) -> bool {
         for test in tests {
-            self.run_test(test);
+            if !self.run_test(test) {
+                return false;
+            }
         }
+        return true;
     }
-    pub fn run_tests_from_class<T: Testable>(&mut self, test_class: T) {
-        self.run_tests(test_class.tests());
+    pub fn run_tests_from_class<T: Testable>(&mut self, test_class: T) -> bool {
+        return self.run_tests(test_class.tests());
     }
     /*pub fn run_tests_from_classes<T: Testable>(&mut self) {
         // TODO: Implement
