@@ -10,5 +10,5 @@ fn main() {
                                                // TODO: Your test case code goes here
                                                TestCaseStatus::PASSED
                                            }));
-    TestRunner::new(0).run_test(test_case);
+    TestRunner::new().run_test(test_case);
 }

@@ -12,5 +12,5 @@ fn main() {
     let test_case = TestCase::new("Test Case Title",
                                   "Test Case Criteria",
                                   Box::new(my_test_case));
-    TestRunner::new(0).run_test(test_case);
+    TestRunner::new().run_test(test_case);
 }

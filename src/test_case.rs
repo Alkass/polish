@@ -45,9 +45,9 @@ pub struct TestRunner {
     results: Vec<TestCaseResults>,
 }
 impl TestRunner {
-    pub fn new(attributes: i64) -> TestRunner {
+    pub fn new() -> TestRunner {
         TestRunner {
-            attributes: attributes,
+            attributes: 0,
             results: vec![],
         }
     }
@@ -60,6 +60,10 @@ impl TestRunner {
         let starting_time: i32 = time::now().tm_nsec;
         let mut status: TestCaseStatus = (test.exec)(&mut logger);
         let ending_time: i32 = time::now().tm_nsec;
+        println!("Ended {} at {} on {}",
+                 test.title,
+                 Local::now().format("%H:%M:%S").to_string(),
+                 Local::now().format("%Y-%m-%d").to_string());
         match status {
             TestCaseStatus::PASSED => {}
             TestCaseStatus::FAILED => {}

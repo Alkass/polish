@@ -22,5 +22,5 @@ fn main() {
                                                    // TODO: Your test case goes here
                                                    TestCaseStatus::FAILED
                                                }))];
-    TestRunner::new(0).run_tests(my_tests);
+    TestRunner::new().run_tests(my_tests);
 }

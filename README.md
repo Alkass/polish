@@ -43,7 +43,7 @@ fn my_test_case(logger: &mut Logger) -> TestCaseStatus {
 
 fn main() {
   let test_case = TestCase::new("Test Case Title", "Test Case Criteria", Box::new(my_test_case));
-  TestRunner::new(0).run_test(test_case);
+  TestRunner::new().run_test(test_case);
 }
 ```
 
@@ -66,7 +66,7 @@ fn main() {
     // TODO: Your test case code goes here
     TestCaseStatus::PASSED
   }));
-  TestRunner::new(0).run_test(test_case);
+  TestRunner::new().run_test(test_case);
 }
 ```
 
@@ -83,7 +83,7 @@ use polish::test_case::{TestRunner, TestCaseStatus, TestCase};
 use polish::logger::Logger;
 
 fn main() {
-  let mut runner = TestRunner::new(0);
+  let mut runner = TestRunner::new();
   runner.run_test(TestCase::new("1st Test Case Title", "Test Case Criteria", Box::new(|logger: &mut Logger| -> TestCaseStatus {
     // TODO: Your test case code goes here
     TestCaseStatus::PASSED
@@ -121,7 +121,7 @@ fn main() {
         // TODO: Your test case goes here
         TestCaseStatus::FAILED
       }))];
-    TestRunner::new(0).run_tests(my_tests);
+    TestRunner::new().run_tests(my_tests);
 }
 ```
 
@@ -157,7 +157,7 @@ impl Testable for MyTestCase {
 }
 
 fn main() {
-  TestRunner::new(0).run_tests_from_class(MyTestCase {});
+  TestRunner::new().run_tests_from_class(MyTestCase {});
 }
 ```
 
@@ -171,9 +171,7 @@ This produces the following:
 
 Attributes allow you to change the behaviour of how your test cases are run. For instance, by default, your `TestRunner` instance will run all your test cases regardless of whether any have failed. If you, however, want this behaviour changed, you will need to specifically tell your `TestRunner` instance to stop the process at the first failure.
 
-The value you pass to `TestRunner::new()` as a function argument indicates the behaviour of your process.
-
-THIS FEATURE IS A WORK-IN-PROGRESS. THIS DOCUMENT WILL BE UPDATED WITH TECHNICAL DETAILS ONCE THE FEATURE IS COMPLETE.
+THIS FEATURE IS STILL WORK-IN-PROGRESS. THIS DOCUMENT WILL BE UPDATED WITH TECHNICAL DETAILS ONCE THE FEATURE IS COMPLETE.
 
 ### Logging
 
