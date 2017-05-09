@@ -12,3 +12,6 @@ matrix:
 script:
 - cargo build --release
 - make test
+env:
+- global:
+  - CODECOV_TOKEN=:7a6fbd13-c8bb-4ac1-bda3-94258cb74cf4
