@@ -1,5 +1,5 @@
 test:
-	sh scripts/test.sh
+	bash scripts/test.sh
 
 codecov:
-	. scripts/codecov-reporting.sh
+	bash scripts/codecov-reporting.sh
