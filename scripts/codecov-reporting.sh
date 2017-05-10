@@ -8,7 +8,7 @@ make
 sudo make install
 cd ../..
 rm -rf kcov-master
-for file in target/debug/polish-*[^\.d]; do
+for file in target/debug/polish-*.d; do
   mkdir -p "target/cov/$(basename $file)"
   kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file"
 done
