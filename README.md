@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/AlKass/polish.svg?branch=master)](https://travis-ci.org/AlKass/polish)
-[![Build Status](https://codeship.com/projects/217937/status?branch=master)](https://codeship.com/projects/217937)
+[![Build Status](https://app.codeship.com/projects/217937?branch=master)](https://codeship.com/projects/217937)
 [![Dependency Status](https://dependencyci.com/github/AlKass/polish/badge)](https://dependencyci.com/github/AlKass/polish)
 [![Crates Package Status](https://img.shields.io/crates/v/polish.svg)](https://crates.io/crates/polish)
 [![](https://img.shields.io/crates/d/polish.svg)](https://crates.io/crates/polish)
