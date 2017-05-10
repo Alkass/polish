@@ -12,3 +12,12 @@ matrix:
 script:
 - cargo build --release
 - make test
+addons:
+  apt:
+    packages:
+      - libcurl4-openssl-dev
+      - libelf-dev
+      - libdw-dev
+      - cmake
+      - gcc
+      - binutils-dev
