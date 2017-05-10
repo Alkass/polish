@@ -12,5 +12,5 @@ for file in target/debug/polish-*[^\.d]; do
   mkdir -p "target/cov/$(basename $file)"
   kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file"
 done
-bash <(curl -s https://codecov.io/bash) &&
+bash <(curl -s https://codecov.io/bash)
 echo "Uploaded code coverage"

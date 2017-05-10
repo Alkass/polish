@@ -2,4 +2,4 @@ test:
 	sh scripts/test.sh
 
 codecov:
-	sh scripts/codecov-reporting.sh
+	source scripts/codecov-reporting.sh
