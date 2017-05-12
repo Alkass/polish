@@ -24,6 +24,8 @@ The `crates.io` package is kept up-to-date with all the major changes which mean
 polish = "*"
 ```
 
+> Replace `*` with the version number shown in the crates.io badge above
+
 But if you'd like to use nightly (most recent) releases, you can include the `GitHub` package repo instead:
 
 ```yaml
