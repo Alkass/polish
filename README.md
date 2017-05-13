@@ -200,6 +200,9 @@ This produces the following:
 
 > If your test case return status is `UNKNOWN` and you've printed at least one `fail` log from within the test case function, your test case result will be marked as `FAILED`. Otherwise, your test case will be marked as `PASSED`.
 
+## Developer Documentation
+Documentation is available at [https://docs.rs/polish](https://docs.rs/polish)
+
 ## Author
 
 [Fadi Hanna Al-Kass](https://github.com/alkass)
