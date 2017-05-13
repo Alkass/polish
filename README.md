@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/AlKass/polish.svg?branch=master)](https://travis-ci.org/AlKass/polish)
-
+[![Build status](https://ci.appveyor.com/api/projects/status/7atowgc0k1d6nx0t/branch/master?svg=true)](https://ci.appveyor.com/project/alkass/polish)
 [![Build Status](https://codeship.com/projects/60f3b840-157f-0135-d42f-6a6f9a84ad3f/status?branch=master)](https://codeship.com/projects/217937)
 [![Dependency Status](https://dependencyci.com/github/AlKass/polish/badge)](https://dependencyci.com/github/AlKass/polish)
 [![codecov](https://codecov.io/gh/AlKass/polish/branch/master/graph/badge.svg)](https://codecov.io/gh/AlKass/polish)
-[![Build status](https://ci.appveyor.com/api/projects/status/7atowgc0k1d6nx0t/branch/master?svg=true)](https://ci.appveyor.com/project/alkass/polish)
+
 [![Crates Package Status](https://img.shields.io/crates/v/polish.svg)](https://crates.io/crates/polish)
 ![](https://docs.rs/polish/badge.svg)
 [![](https://img.shields.io/crates/d/polish.svg)](https://crates.io/crates/polish)
