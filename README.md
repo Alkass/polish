@@ -4,6 +4,7 @@
 [![codecov](https://codecov.io/gh/AlKass/polish/branch/master/graph/badge.svg)](https://codecov.io/gh/AlKass/polish)
 [![Crates Package Status](https://img.shields.io/crates/v/polish.svg)](https://crates.io/crates/polish)
 [![](https://img.shields.io/crates/d/polish.svg)](https://crates.io/crates/polish)
+[![docs][docs-img]](https://docs.rs/polish)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/AlKass/polish/blob/master/License.md)
 
 <div align="center">
@@ -199,9 +200,6 @@ This produces the following:
 > The example listed above is available [here](examples/logs.rs)
 
 > If your test case return status is `UNKNOWN` and you've printed at least one `fail` log from within the test case function, your test case result will be marked as `FAILED`. Otherwise, your test case will be marked as `PASSED`.
-
-## Developer Documentation
-Documentation is available at [https://docs.rs/polish](https://docs.rs/polish)
 
 ## Author
 
