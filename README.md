@@ -4,7 +4,7 @@
 [![Dependency Status](https://dependencyci.com/github/AlKass/polish/badge)](https://dependencyci.com/github/AlKass/polish)
 
 [![Crates Package Status](https://img.shields.io/crates/v/polish.svg)](https://crates.io/crates/polish)
-[![](https://docs.rs/polish/badge.svg)](https://docs.rs/polish/badge.svg)
+[![](https://docs.rs/polish/badge.svg)](https://docs.rs/polish)
 [![](https://img.shields.io/crates/d/polish.svg)](https://crates.io/crates/polish)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/AlKass/polish/blob/master/License.md)
