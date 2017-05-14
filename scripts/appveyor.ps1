@@ -11,3 +11,8 @@ Start-FileDownload "https://static.rust-lang.org/dist/$rust_install" -FileName $
 Start-Process -FilePath msiexec -ArgumentList /i, $rust_install, /quiet, INSTALLDIR="C:\Rust" -Wait
 $env:Path = $env:Path + ";C:\Rust\bin"
 rustc -vV
+
+Get-ChildItem "examples" -Filter *.log | Foreach-Object {
+  cp $_.FullName src/test.rs
+  cargo run
+}
