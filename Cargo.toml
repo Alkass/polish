@@ -13,6 +13,7 @@ license-file = "License.md"
 
 [badges]
 travis-ci = { repository = "AlKass/polish" }
+appveyor = { repository = "AlKass/polish", branch = "master", service = "github" }
 
 [dependencies]
 chrono = "0.3.0"
