@@ -1,12 +1,24 @@
 use chrono::prelude::Local;
 use ansi_term::Colour::{Green, Red, Cyan, Yellow, Purple};
 
+/// LogType servers as an indicator for the logger.
+/// it tells the Logger object everything it needs
+/// to know about the type of the log to be printed.
+///
+/// Example:
+/// let mut logger = Logger::new();
+/// logger.log(LogType::PASS, format!("Log here"));
+///
+/// Similarly, the pass, fail, warn, and info functions
+/// pass a LogType to the log function behind the scenes.
 pub enum LogType {
     PASS,
     FAIL,
     INFO,
     WARN,
 }
+
+/// this is a comment
 pub struct Logger {
     _pass: i32,
     _fail: i32,
