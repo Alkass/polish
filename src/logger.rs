@@ -7,9 +7,10 @@ pub enum LogType {
     /// to know about the type of the log to be printed.
     ///
     /// Example:
+    /// ```rust
     /// let mut logger = Logger::new();
     /// logger.log(LogType::PASS, format!("Log here"));
-    ///
+    /// ```
     /// Similarly, the pass, fail, warn, and info functions
     /// pass a LogType to the log function behind the scenes.
     PASS,
