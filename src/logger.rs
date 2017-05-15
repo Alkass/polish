@@ -12,6 +12,9 @@ use ansi_term::Colour::{Green, Red, Cyan, Yellow, Purple};
 /// Similarly, the pass, fail, warn, and info functions
 /// pass a LogType to the log function behind the scenes.
 pub enum LogType {
+    // one of these values is passed to the `log` functions
+    // under the `Logger` object, so the logger knows what
+    // type of log to print
     PASS,
     FAIL,
     INFO,
