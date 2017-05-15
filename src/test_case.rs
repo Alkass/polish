@@ -132,9 +132,6 @@ impl TestRunner {
     pub fn run_tests_from_class<T: Testable>(&mut self, test_class: T) -> bool {
         return self.run_tests(test_class.tests());
     }
-    /*pub fn run_tests_from_classes<T: Testable>(&mut self) {
-        // TODO: Implement
-    }*/
 }
 impl Drop for TestRunner {
     fn drop(&mut self) {

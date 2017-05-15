@@ -19,8 +19,11 @@ pub enum LogType {
     WARN,
 }
 
-/// this is a comment
 pub struct Logger {
+    /// The `Logger` object provides a logging mechanism for
+    /// each test case. At the end of each test case, the
+    /// `Drop` trait kicks in and prints out some statistics
+    /// relevant to the test case that was just run.
     _pass: i32,
     _fail: i32,
     _warn: i32,
