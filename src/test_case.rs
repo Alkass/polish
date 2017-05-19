@@ -1,5 +1,6 @@
 use time;
 use chrono::prelude::Local;
+use ansi_term::Colour;
 use ansi_term::Colour::{Green, Red, Yellow};
 use logger::Logger;
 
@@ -134,18 +135,21 @@ impl Drop for TestRunner {
             let (mut pass, mut fail, mut skip): (i32, i32, i32) = (0, 0, 0);
             print!("\n");
             for stat in self.results.iter() {
-                match stat.status {
-                    TestCaseStatus::PASSED => pass += 1,
-                    TestCaseStatus::FAILED => fail += 1,
-                    TestCaseStatus::SKIPPED => skip += 1,
-                    _ => {}
+                let color: Colour;
+                if stat.status == TestCaseStatus::PASSED {
+                    pass += 1;
+                    color = Green;
+                } else if stat.status == TestCaseStatus::FAILED {
+                    fail += 1;
+                    color = Red;
+                } else if stat.status == TestCaseStatus::SKIPPED {
+                    skip += 1;
+                    color = Yellow;
+                } else {
+                    // Note: This is not really needed but is used to shut up the compiler
+                    // about a possibly uninitialized object
+                    color = Yellow;
                 }
-                let color = match stat.status {
-                    TestCaseStatus::PASSED => Green,
-                    TestCaseStatus::FAILED => Red,
-                    TestCaseStatus::SKIPPED => Yellow,
-                    _ => Yellow,
-                };
                 total_count += 1;
                 total_duration += stat.duration;
                 let formatted_text = color.paint(format!("{} ({}) ... {}ns",
