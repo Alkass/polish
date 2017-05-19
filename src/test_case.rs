@@ -3,6 +3,7 @@ use chrono::prelude::Local;
 use ansi_term::Colour::{Green, Red, Yellow};
 use logger::Logger;
 
+#[derive(PartialEq)]
 pub enum TestCaseStatus {
     PASSED,
     FAILED,
@@ -42,14 +43,12 @@ pub trait Testable {
 #[allow(dead_code)]
 pub struct TestRunnerAttributes {
     pub drop_after_first_failure: i64,
-    pub disable_final_stats: i64
-    // more attributes can be added here
+    pub disable_final_stats: i64, // more attributes can be added here
 }
 
 pub static TEST_RUNNER_ATTRIBUTES: TestRunnerAttributes = TestRunnerAttributes {
     drop_after_first_failure: 0x0000000000000001,
-    disable_final_stats: 0x0000000000000002
-        // attribute values need to be assigned here if new attributes are added to TestRunnerAttributes
+    disable_final_stats: 0x0000000000000002, // attribute values need to be assigned here if new attributes are added to TestRunnerAttributes
 };
 
 #[allow(dead_code)]
@@ -87,16 +86,11 @@ impl TestRunner {
                  test.title,
                  Local::now().format("%H:%M:%S").to_string(),
                  Local::now().format("%Y-%m-%d").to_string());
-        match status {
-            TestCaseStatus::PASSED => {}
-            TestCaseStatus::FAILED => {}
-            TestCaseStatus::SKIPPED => {}
-            TestCaseStatus::UNKNOWN => {
-                if logger.get_num_fail() > 0 {
-                    status = TestCaseStatus::FAILED;
-                } else {
-                    status = TestCaseStatus::PASSED;
-                }
+        if status == TestCaseStatus::UNKNOWN {
+            if logger.get_num_fail() > 0 {
+                status = TestCaseStatus::FAILED;
+            } else {
+                status = TestCaseStatus::PASSED;
             }
         }
         let mark = match status {
@@ -154,8 +148,10 @@ impl Drop for TestRunner {
                 };
                 total_count += 1;
                 total_duration += stat.duration;
-                let formatted_text =
-                    color.paint(format!("{} ({}) ... {}ns", stat.title, stat.criteria, stat.duration));
+                let formatted_text = color.paint(format!("{} ({}) ... {}ns",
+                                                         stat.title,
+                                                         stat.criteria,
+                                                         stat.duration));
                 println!("{}", formatted_text);
             }
             println!("\nRan {} test(s) in {}ns", total_count, total_duration);
@@ -166,6 +162,6 @@ impl Drop for TestRunner {
                      formatted_pass,
                      formatted_failed,
                      formatted_skipped);
-            }
         }
+    }
 }

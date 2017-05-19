@@ -1,7 +1,7 @@
 [package]
 name = "polish"
 description = "Polish is a test frammework designed to allow the construction of test-driven development processes written in Rust"
-version = "0.7.0"
+version = "0.7.1"
 authors = ["Fadi Hanna Al-Kass"]
 documentation = "https://docs.rs/polish"
 homepage = "https://github.com/AlKass/polish"
