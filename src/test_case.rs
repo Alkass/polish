@@ -4,7 +4,7 @@ use ansi_term::Colour;
 use ansi_term::Colour::{Green, Red, Yellow};
 use logger::Logger;
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone)]
 pub enum TestCaseStatus {
     PASSED,
     FAILED,
@@ -107,14 +107,14 @@ impl TestRunner {
             TestCaseStatus::UNKNOWN => Yellow.paint(test.criteria),
         };
         println!("{} ... {}", formatted_criteria, mark);
-        let test_info: TestCaseResults = TestCaseResults {
+        let test_info = TestCaseResults {
             title: test.title,
             criteria: test.criteria,
             duration: (ending_time - starting_time) / 1000,
-            status: status,
+            status: status.clone(),
         };
         self.results.push(test_info);
-        return true; // TODO: implement
+        return status == TestCaseStatus::PASSED;
     }
     pub fn run_tests(&mut self, tests: Vec<TestCase>) -> bool {
         for test in tests {
@@ -136,20 +136,23 @@ impl Drop for TestRunner {
             print!("\n");
             for stat in self.results.iter() {
                 let color: Colour;
-                if stat.status == TestCaseStatus::PASSED {
-                    pass += 1;
-                    color = Green;
-                } else if stat.status == TestCaseStatus::FAILED {
-                    fail += 1;
-                    color = Red;
-                } else if stat.status == TestCaseStatus::SKIPPED {
-                    skip += 1;
-                    color = Yellow;
-                } else {
-                    // Note: This is not really needed but is used to shut up the compiler
-                    // about a possibly uninitialized object
-                    color = Yellow;
-                }
+                match stat.status {
+                    TestCaseStatus::PASSED => {
+                        pass += 1;
+                        color = Green;
+                    },
+                    TestCaseStatus::FAILED => {
+                        fail += 1;
+                        color = Red;
+                    },
+                    TestCaseStatus::SKIPPED => {
+                        skip += 1;
+                        color = Yellow;
+                    },
+                    _ => {
+                        color = Yellow;
+                    }
+                };
                 total_count += 1;
                 total_duration += stat.duration;
                 let formatted_text = color.paint(format!("{} ({}) ... {}ns",
