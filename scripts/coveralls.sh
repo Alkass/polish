@@ -1,1 +1,1 @@
-echo to be implemented
+echo JOB_ID: $1
