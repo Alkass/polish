@@ -13,7 +13,6 @@ matrix:
 script:
 - cargo build --release
 - make test
-after_success: make coveralls JOB_ID=$TRAVIS_JOB_ID
 addons:
   apt:
     packages:

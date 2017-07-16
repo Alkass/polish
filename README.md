@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/AlKass/polish.svg?branch=master)](https://travis-ci.org/AlKass/polish)
 [![Dependency Status](https://dependencyci.com/github/AlKass/polish/badge)](https://dependencyci.com/github/AlKass/polish)
-[![Coverage Status](https://coveralls.io/repos/github/AlKass/polish/badge.svg)](https://coveralls.io/github/AlKass/polish)
 [![Crates Package Status](https://img.shields.io/crates/v/polish.svg)](https://crates.io/crates/polish)
 [![](https://docs.rs/polish/badge.svg)](https://docs.rs/polish)
 [![](https://img.shields.io/crates/d/polish.svg)](https://crates.io/crates/polish)
