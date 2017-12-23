@@ -60,13 +60,19 @@ pub static TEST_RUNNER_ATTRIBUTES: TestRunnerAttributes = TestRunnerAttributes {
 pub struct TestRunner {
     attributes: i64,
     results: Vec<TestCaseResults>,
+    module_path: &'static str,
 }
 impl TestRunner {
     pub fn new() -> TestRunner {
         TestRunner {
             attributes: 0,
             results: vec![],
+            module_path: "",
         }
+    }
+    pub fn set_module_path(&mut self, path: &'static str) -> &mut Self {
+        self.module_path = path;
+        self
     }
     pub fn set_attribute(&mut self, attribute: i64) -> &mut Self {
         self.attributes |= attribute;
@@ -116,11 +122,11 @@ impl TestRunner {
             TestCaseStatus::SKIPPED => Yellow.paint(test.criteria),
             TestCaseStatus::UNKNOWN => Yellow.paint(test.criteria),
         };
-        if self.has_attribute(TEST_RUNNER_ATTRIBUTES.minimize_output) {
-            println!("{} {}", mark, formatted_criteria);
+        if self.module_path.len() > 0 {
+            println!("{} {}: {}", mark, format!("{}::{}", self.module_path, test.title), formatted_criteria);
         }
         else {
-            println!("{} .. {}", formatted_criteria, mark);
+            println!("{} {}: {}", mark, test.title, formatted_criteria);
         }
         let test_info = TestCaseResults {
             title: test.title,
