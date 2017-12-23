@@ -68,12 +68,13 @@ impl TestRunner {
             results: vec![],
         }
     }
-    pub fn set_attribute(&mut self, attribute: i64) {
-
+    pub fn set_attribute(&mut self, attribute: i64) -> &mut Self {
         self.attributes |= attribute;
+        self
     }
-    pub fn set_attributes(&mut self, attributes: i64) {
+    pub fn set_attributes(&mut self, attributes: i64) -> &mut Self {
         self.attributes = attributes;
+        self
     }
     pub fn has_attribute(&self, attribute: i64) -> bool {
         self.attributes & attribute == attribute
