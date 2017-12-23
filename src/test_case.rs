@@ -43,13 +43,17 @@ pub trait Testable {
 
 #[allow(dead_code)]
 pub struct TestRunnerAttributes {
-    pub drop_after_first_failure: i64,
-    pub disable_final_stats: i64, // more attributes can be added here
+    pub bail_out_after_first_failure: i64,
+    pub disable_final_stats:          i64,
+    pub minimize_output:              i64,
+    // more attributes can be added here
 }
 
+// attribute values need to be assigned here if new attributes are added to TestRunnerAttributes
 pub static TEST_RUNNER_ATTRIBUTES: TestRunnerAttributes = TestRunnerAttributes {
-    drop_after_first_failure: 0x0000000000000001,
-    disable_final_stats: 0x0000000000000002, // attribute values need to be assigned here if new attributes are added to TestRunnerAttributes
+    bail_out_after_first_failure: 0x1,
+    disable_final_stats:          0x2,
+    minimize_output:              0x4,
 };
 
 #[allow(dead_code)]
@@ -75,18 +79,23 @@ impl TestRunner {
         self.attributes & attribute == attribute
     }
     pub fn run_test(&mut self, test: TestCase) -> bool {
-        println!("Starting {} at {} on {}",
-                 test.title,
-                 Local::now().format("%H:%M:%S").to_string(),
-                 Local::now().format("%Y-%m-%d").to_string());
+        if !self.has_attribute(TEST_RUNNER_ATTRIBUTES.minimize_output) {
+            println!("Starting {} at {} on {}",
+                     test.title,
+                     Local::now().format("%H:%M:%S").to_string(),
+                     Local::now().format("%Y-%m-%d").to_string());
+        }
         let mut logger: Logger = Logger::new();
         let starting_time: i32 = time::now().tm_nsec;
         let mut status: TestCaseStatus = (test.exec)(&mut logger);
         let ending_time: i32 = time::now().tm_nsec;
-        println!("Ended {} at {} on {}",
-                 test.title,
-                 Local::now().format("%H:%M:%S").to_string(),
-                 Local::now().format("%Y-%m-%d").to_string());
+        if !self.has_attribute(TEST_RUNNER_ATTRIBUTES.minimize_output) {
+            println!("Ended {} at {} on {}",
+                     test.title,
+                     Local::now().format("%H:%M:%S").to_string(),
+                     Local::now().format("%Y-%m-%d").to_string());
+            logger.drop();
+        }
         if status == TestCaseStatus::UNKNOWN {
             if logger.get_num_fail() > 0 {
                 status = TestCaseStatus::FAILED;
@@ -106,7 +115,12 @@ impl TestRunner {
             TestCaseStatus::SKIPPED => Yellow.paint(test.criteria),
             TestCaseStatus::UNKNOWN => Yellow.paint(test.criteria),
         };
-        println!("{} ... {}", formatted_criteria, mark);
+        if self.has_attribute(TEST_RUNNER_ATTRIBUTES.minimize_output) {
+            println!("{} {}", mark, formatted_criteria);
+        }
+        else {
+            println!("{} .. {}", formatted_criteria, mark);
+        }
         let test_info = TestCaseResults {
             title: test.title,
             criteria: test.criteria,
@@ -118,7 +132,7 @@ impl TestRunner {
     }
     pub fn run_tests(&mut self, tests: Vec<TestCase>) -> bool {
         for test in tests {
-            if !self.run_test(test) {
+            if !self.run_test(test) && self.has_attribute(TEST_RUNNER_ATTRIBUTES.bail_out_after_first_failure) {
                 return false;
             }
         }

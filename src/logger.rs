@@ -71,9 +71,7 @@ impl Logger {
     pub fn get_num_info(&self) -> i32 {
         self._info
     }
-}
-impl Drop for Logger {
-    fn drop(&mut self) {
+    pub fn drop(&mut self) {
         let formatted_pass = format!("{} {}", self.get_num_pass(), Green.paint("PASS"));
         let formatted_fail = format!("{} {}", self.get_num_fail(), Red.paint("FAIL"));
         let formatted_warn = format!("{} {}", self.get_num_warn(), Yellow.paint("WARN"));
