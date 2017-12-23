@@ -122,18 +122,18 @@ impl TestRunner {
             TestCaseStatus::SKIPPED => Yellow.paint(test.criteria),
             TestCaseStatus::UNKNOWN => Yellow.paint(test.criteria),
         };
-        if self.module_path.len() > 0 {
-            println!("{} {}: {}", mark, format!("{}::{}", self.module_path, test.title), formatted_criteria);
-        }
-        else {
-            println!("{} {}: {}", mark, test.title, formatted_criteria);
-        }
         let test_info = TestCaseResults {
             title: test.title,
             criteria: test.criteria,
             duration: (ending_time - starting_time) / 1000,
             status: status.clone(),
         };
+        if self.module_path.len() > 0 {
+            println!("{} {}::{}: {} ({}ns)", mark, self.module_path, test.title, formatted_criteria, test_info.duration);
+        }
+        else {
+            println!("{} {}: {} ({}ns)", mark, test.title, formatted_criteria, test_info.duration);
+        }
         self.results.push(test_info);
         return status == TestCaseStatus::PASSED;
     }
