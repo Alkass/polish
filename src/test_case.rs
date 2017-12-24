@@ -125,7 +125,7 @@ impl TestRunner {
         let test_info = TestCaseResults {
             title: test.title,
             criteria: test.criteria,
-            duration: (ending_time - starting_time) / 1000,
+            duration: ending_time - starting_time,
             status: status.clone(),
         };
         if self.module_path.len() > 0 {
