@@ -1,4 +1,4 @@
-for example in examples/*; do
+for example in examples/*.rs; do
   echo $example
   cp $example src/main.rs
   cargo run

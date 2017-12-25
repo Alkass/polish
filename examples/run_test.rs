@@ -9,8 +9,6 @@ fn my_test_case(_: &mut Logger) -> TestCaseStatus {
 }
 
 fn main() {
-    let test_case = TestCase::new("Test Case Title",
-                                  "Test Case Criteria",
-                                  Box::new(my_test_case));
+    let test_case = TestCase::new("Test Case Title", "Test Case Criteria", Box::new(my_test_case));
     TestRunner::new().run_test(test_case);
 }
