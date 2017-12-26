@@ -163,6 +163,11 @@ impl TestRunner {
         else if self.time_unit == TEST_RUNNER_TIME_UNITS.microseconds {
             duration /= 1000 as DurationType;
         }
+        let precision = match duration {
+            _ if duration < 1.0 => 2_usize,
+            _ if duration < 10.0 => 1_usize,
+            _ => 0_usize,
+        };
         let test_info = TestCaseResults {
             title: test.title,
             criteria: test.criteria,
@@ -170,10 +175,10 @@ impl TestRunner {
             status: status.clone(),
         };
         if self.module_path.len() > 0 {
-            println!("{} {}::{}: {} ({}{})", mark, self.module_path, test.title, formatted_criteria, test_info.duration, self.time_unit.1);
+            println!("{} {}::{}: {} ({:.*}{})",mark, self.module_path, test.title, formatted_criteria, precision, test_info.duration, self.time_unit.1);
         }
         else {
-            println!("{} {}: {} ({}{})", mark, test.title, formatted_criteria, test_info.duration, self.time_unit.1);
+            println!("{} {}: {} ({:.*}{})",mark, test.title, formatted_criteria, precision, test_info.duration, self.time_unit.1);
         }
         self.results.push(test_info);
         return status == TestCaseStatus::PASSED;
