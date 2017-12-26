@@ -9,8 +9,9 @@
 </div>
 
 # Polish
+Polish is Test-Driven Development done right
 
-`Polish` is a test framework designed to allow the construction of test-driven development processes written in `Rust`.
+[![asciicast](https://asciinema.org/a/sDVhKPAB8elO5flUB5lb7Z10g.png)](https://asciinema.org/a/sDVhKPAB8elO5flUB5lb7Z10g)
 
 ## Getting Started
 
