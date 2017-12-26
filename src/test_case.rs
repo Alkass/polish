@@ -165,8 +165,8 @@ impl TestRunner {
         }
         let precision = match duration {
             _ if duration < 1.0 => 2_usize,
-            _ if duration < 10.0 => 1_usize,
-            _ => 0_usize,
+            _ if duration < 10.0 => 1,
+            _ => 0,
         };
         let test_info = TestCaseResults {
             title: test.title,
