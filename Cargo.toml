@@ -12,7 +12,7 @@ categories = ["development-tools::testing"]
 license = "MIT"
 
 [badges]
-travis-ci = { repository = "AlKass/polish" }
+travis-ci = { repository = "Alkass/polish" }
 
 [dependencies]
 chrono = "0.3.0"
