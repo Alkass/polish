@@ -2,6 +2,7 @@
 [![Crates Package Status](https://img.shields.io/crates/v/polish.svg)](https://crates.io/crates/polish)
 [![](https://docs.rs/polish/badge.svg)](https://docs.rs/polish)
 [![](https://img.shields.io/crates/d/polish.svg)](https://crates.io/crates/polish)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2c175afac87445e6b6fafaaf32680a9d)](https://www.codacy.com/app/Alkass/polish?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Alkass/polish&amp;utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/AlKass/polish/blob/master/License.md)
 
 <div align="center">
