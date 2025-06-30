@@ -25,6 +25,7 @@ jobs:
       uses: actions-rs/toolchain@v1
       with:
         toolchain: ${{ matrix.rust }}
+        components: clippy, rustfmt
         override: true
 
     - name: Cache Cargo registry
