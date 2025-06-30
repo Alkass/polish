@@ -2,7 +2,7 @@ use time::OffsetDateTime;
 use chrono::prelude::Local;
 use ansi_term::Colour;
 use ansi_term::Colour::{Green, Red, Yellow};
-use logger::Logger;
+use crate::logger::Logger;
 
 #[derive(PartialEq, Clone)]
 pub enum TestCaseStatus {
