@@ -15,6 +15,6 @@ license = "MIT"
 github-actions = { repository = "AlKass/polish", workflow = "Rust CI" }
 
 [dependencies]
-chrono = "0.3.0"
-ansi_term = "0.9.0"
-time = "0.1.37"
+chrono = "0.4.41"
+ansi_term = "0.12.1"
+time = "0.3.41"

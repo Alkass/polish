@@ -1,4 +1,4 @@
-use time;
+use time::OffsetDateTime;
 use chrono::prelude::Local;
 use ansi_term::Colour;
 use ansi_term::Colour::{Green, Red, Yellow};
@@ -15,12 +15,12 @@ pub enum TestCaseStatus {
 pub struct TestCase {
     pub title: &'static str,
     pub criteria: &'static str,
-    pub exec: Box<Fn(&mut Logger) -> TestCaseStatus>,
+    pub exec: Box<dyn Fn(&mut Logger) -> TestCaseStatus>,
 }
 impl TestCase {
     pub fn new(title: &'static str,
                criteria: &'static str,
-               exec: Box<Fn(&mut Logger) -> TestCaseStatus>)
+               exec: Box<dyn Fn(&mut Logger) -> TestCaseStatus>)
                -> TestCase {
         TestCase {
             title: title,
@@ -120,9 +120,9 @@ impl TestRunner {
                      Local::now().format("%Y-%m-%d").to_string());
         }
         let mut logger: Logger = Logger::new();
-        let starting_time: i32 = time::now().tm_nsec;
+        let starting_time: i128 = OffsetDateTime::now_utc().unix_timestamp_nanos();
         let mut status: TestCaseStatus = (test.exec)(&mut logger);
-        let ending_time: i32 = time::now().tm_nsec;
+        let ending_time: i128 = OffsetDateTime::now_utc().unix_timestamp_nanos();
         if !self.has_attribute(TEST_RUNNER_ATTRIBUTES.minimize_output) {
             println!("Ended {} at {} on {}",
                      test.title,
