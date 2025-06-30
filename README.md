@@ -1,4 +1,4 @@
-[![Rust CI](https://github.com/AlKass/polish/actions/workflows/build.yml/badge.svg)](https://github.com/AlKass/polish/actions/workflows/build.yml)
+[![Rust CI](https://github.com/AlKass/polish/actions/workflows/ci.yml/badge.svg)](https://github.com/AlKass/polish/actions/workflows/ci.yml)
 [![Crates Package Status](https://img.shields.io/crates/v/polish.svg)](https://crates.io/crates/polish)
 [![](https://docs.rs/polish/badge.svg)](https://docs.rs/polish)
 [![](https://img.shields.io/crates/d/polish.svg)](https://crates.io/crates/polish)
