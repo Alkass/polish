@@ -235,9 +235,9 @@ impl Drop for TestRunner {
             else {
                 println!("\nRan {} tests in {}{}", total_count, total_duration, self.time_unit.1);
             }
-            let formatted_pass = Green.paint(format!("{pass} Passed", pass = pass));
-            let formatted_failed = Red.paint(format!("{fail} Failed", fail = fail));
-            let formatted_skipped = Yellow.paint(format!("{skip} Skipped", skip = skip));
+            let formatted_pass = Green.paint(format!("{pass} Passed"));
+            let formatted_failed = Red.paint(format!("{fail} Failed"));
+            let formatted_skipped = Yellow.paint(format!("{skip} Skipped"));
             println!("{formatted_pass}  {formatted_failed}  {formatted_skipped}");
         }
     }
