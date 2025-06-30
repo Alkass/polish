@@ -1,2 +1,2 @@
 test:
-	. scripts/test.sh
+	bash scripts/test.sh

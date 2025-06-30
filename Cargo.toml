@@ -2,6 +2,7 @@
 name = "polish"
 description = "Test-Driven Development done right"
 version = "0.9.9"
+edition = "2021"
 authors = ["Fadi Hanna Al-Kass"]
 documentation = "https://docs.rs/polish"
 homepage = "https://github.com/AlKass/polish"
