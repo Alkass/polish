@@ -14,6 +14,12 @@ pub struct Logger {
     _warn: i32,
     _info: i32,
 }
+
+impl Default for Logger {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 impl Logger {
     pub fn new() -> Logger {
         Logger {
@@ -72,14 +78,10 @@ impl Logger {
         self._info
     }
     pub fn summary(&mut self) {
-        let formatted_pass = format!("{} {}", self.get_num_pass(), Green.paint("PASS"));
-        let formatted_fail = format!("{} {}", self.get_num_fail(), Red.paint("FAIL"));
-        let formatted_warn = format!("{} {}", self.get_num_warn(), Yellow.paint("WARN"));
-        let formatted_info = format!("{} {}", self.get_num_info(), Cyan.paint("INFO"));
-        println!("{}  {}  {}  {}",
-                 formatted_pass,
-                 formatted_fail,
-                 formatted_warn,
-                 formatted_info);
+        let formatted_pass = Green.paint(format!("{pass} Passed", pass = self.get_num_pass()));
+        let formatted_fail = Red.paint(format!("{fail} Failed", fail = self.get_num_fail()));
+        let formatted_warn = Yellow.paint(format!("{warn} Warn", warn = self.get_num_warn()));
+        let formatted_info = Cyan.paint(format!("{info} Info", info = self.get_num_info()));
+        println!("{formatted_pass}  {formatted_fail}  {formatted_warn}  {formatted_info}");
     }
 }

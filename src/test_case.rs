@@ -22,11 +22,7 @@ impl TestCase {
                criteria: &'static str,
                exec: Box<dyn Fn(&mut Logger) -> TestCaseStatus>)
                -> TestCase {
-        TestCase {
-            title: title,
-            criteria: criteria,
-            exec: exec,
-        }
+        TestCase { title, criteria, exec }
     }
 }
 
@@ -84,6 +80,12 @@ pub struct TestRunner {
     results: Vec<TestCaseResults>,
     module_path: &'static str,
 }
+
+impl Default for TestRunner {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 impl TestRunner {
     pub fn new() -> TestRunner {
         TestRunner {
@@ -116,8 +118,8 @@ impl TestRunner {
         if !self.has_attribute(TEST_RUNNER_ATTRIBUTES.minimize_output) {
             println!("Starting {} at {} on {}",
                      test.title,
-                     Local::now().format("%H:%M:%S").to_string(),
-                     Local::now().format("%Y-%m-%d").to_string());
+                     Local::now().format("%H:%M:%S"),
+                     Local::now().format("%Y-%m-%d"));
         }
         let mut logger: Logger = Logger::new();
         let start_time = Instant::now();
@@ -126,8 +128,8 @@ impl TestRunner {
         if !self.has_attribute(TEST_RUNNER_ATTRIBUTES.minimize_output) {
             println!("Ended {} at {} on {}",
                      test.title,
-                     Local::now().format("%H:%M:%S").to_string(),
-                     Local::now().format("%Y-%m-%d").to_string());
+                     Local::now().format("%H:%M:%S"),
+                     Local::now().format("%Y-%m-%d"));
             logger.summary();
         }
         if status == TestCaseStatus::UNKNOWN {
@@ -171,17 +173,17 @@ impl TestRunner {
         let test_info = TestCaseResults {
             title: test.title,
             criteria: test.criteria,
-            duration: duration,
+            duration,
             status: status.clone(),
         };
-        if self.module_path.len() > 0 {
+        if !self.module_path.is_empty() {
             println!("{} {}::{}: {} ({:.*}{})",mark, self.module_path, test.title, formatted_criteria, precision, test_info.duration, self.time_unit.1);
         }
         else {
             println!("{} {}: {} ({:.*}{})",mark, test.title, formatted_criteria, precision, test_info.duration, self.time_unit.1);
         }
         self.results.push(test_info);
-        return status == TestCaseStatus::PASSED;
+        status == TestCaseStatus::PASSED
     }
     pub fn run_tests(&mut self, tests: Vec<TestCase>) -> bool {
         for test in tests {
@@ -189,10 +191,10 @@ impl TestRunner {
                 return false;
             }
         }
-        return true;
+        true
     }
     pub fn run_tests_from_class<T: Testable>(&mut self, test_class: T) -> bool {
-        return self.run_tests(test_class.tests());
+        self.run_tests(test_class.tests())
     }
 }
 impl Drop for TestRunner {
@@ -200,29 +202,26 @@ impl Drop for TestRunner {
         if !self.has_attribute(TEST_RUNNER_ATTRIBUTES.disable_final_stats) {
             let (mut total_count, mut total_duration): (i32, DurationType) = (0, 0 as DurationType);
             let (mut pass, mut fail, mut skip): (i32, i32, i32) = (0, 0, 0);
-            print!("\n");
+            println!();
             for stat in self.results.iter() {
-                let color: Colour;
-                match stat.status {
+                let color: Colour = match stat.status {
                     TestCaseStatus::PASSED => {
                         pass += 1;
-                        color = Green;
+                        Green
                     },
                     TestCaseStatus::FAILED => {
                         fail += 1;
-                        color = Red;
+                        Red
                     },
                     TestCaseStatus::SKIPPED => {
                         skip += 1;
-                        color = Yellow;
+                        Yellow
                     },
-                    _ => {
-                        color = Yellow;
-                    }
+                    _ => Yellow,
                 };
                 total_count += 1;
                 total_duration += stat.duration;
-                if self.module_path.len() > 0 {
+                if !self.module_path.is_empty() {
                     println!("{}", color.paint(format!("{}::{}: {} ({}{})", self.module_path, stat.title, stat.criteria, stat.duration, self.time_unit.1)));
                 }
                 else {
@@ -236,10 +235,10 @@ impl Drop for TestRunner {
             else {
                 println!("\nRan {} tests in {}{}", total_count, total_duration, self.time_unit.1);
             }
-            let formatted_pass = Green.paint(format!("{} Passed", pass));
-            let formatted_failed = Red.paint(format!("{} Failed", fail));
-            let formatted_skipped = Yellow.paint(format!("{} Skipped", skip));
-            println!("{}  {}  {}", formatted_pass, formatted_failed, formatted_skipped);
+            let formatted_pass = Green.paint(format!("{pass} Passed", pass = pass));
+            let formatted_failed = Red.paint(format!("{fail} Failed", fail = fail));
+            let formatted_skipped = Yellow.paint(format!("{skip} Skipped", skip = skip));
+            println!("{formatted_pass}  {formatted_failed}  {formatted_skipped}");
         }
     }
 }
