@@ -10,11 +10,11 @@ readme = "README.md"
 keywords = ["Rust", "Testing", "Test-Driven"]
 categories = ["development-tools::testing"]
 license = "MIT"
+edition = "2021"
 
 [badges]
-travis-ci = { repository = "Alkass/polish" }
+github-actions = { repository = "Alkass/polish", workflow = "Rust CI" }
 
 [dependencies]
-chrono = "0.3.0"
-ansi_term = "0.9.0"
-time = "0.1.37"
+chrono = "0.4"
+ansi_term = "0.12"

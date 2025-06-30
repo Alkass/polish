@@ -1,8 +1,8 @@
-use time;
+use std::time::Instant;
 use chrono::prelude::Local;
 use ansi_term::Colour;
 use ansi_term::Colour::{Green, Red, Yellow};
-use logger::Logger;
+use crate::logger::Logger;
 
 #[derive(PartialEq, Clone)]
 pub enum TestCaseStatus {
@@ -15,12 +15,12 @@ pub enum TestCaseStatus {
 pub struct TestCase {
     pub title: &'static str,
     pub criteria: &'static str,
-    pub exec: Box<Fn(&mut Logger) -> TestCaseStatus>,
+    pub exec: Box<dyn Fn(&mut Logger) -> TestCaseStatus>,
 }
 impl TestCase {
     pub fn new(title: &'static str,
                criteria: &'static str,
-               exec: Box<Fn(&mut Logger) -> TestCaseStatus>)
+               exec: Box<dyn Fn(&mut Logger) -> TestCaseStatus>)
                -> TestCase {
         TestCase {
             title: title,
@@ -120,15 +120,15 @@ impl TestRunner {
                      Local::now().format("%Y-%m-%d").to_string());
         }
         let mut logger: Logger = Logger::new();
-        let starting_time: i32 = time::now().tm_nsec;
+        let start_time = Instant::now();
         let mut status: TestCaseStatus = (test.exec)(&mut logger);
-        let ending_time: i32 = time::now().tm_nsec;
+        let duration_ns = start_time.elapsed().as_nanos() as DurationType;
         if !self.has_attribute(TEST_RUNNER_ATTRIBUTES.minimize_output) {
             println!("Ended {} at {} on {}",
                      test.title,
                      Local::now().format("%H:%M:%S").to_string(),
                      Local::now().format("%Y-%m-%d").to_string());
-            logger.drop();
+            logger.summary();
         }
         if status == TestCaseStatus::UNKNOWN {
             if logger.get_num_fail() > 0 {
@@ -149,7 +149,7 @@ impl TestRunner {
             TestCaseStatus::SKIPPED => Yellow.paint(test.criteria),
             TestCaseStatus::UNKNOWN => Yellow.paint(test.criteria),
         };
-        let mut duration: DurationType = (ending_time - starting_time) as DurationType;
+        let mut duration: DurationType = duration_ns;
         if self.time_unit == TEST_RUNNER_TIME_UNITS.minutes {
             duration /= 1000000000 as DurationType;
             duration /= 60 as DurationType;

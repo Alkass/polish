@@ -12,6 +12,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust: [stable, beta, nightly]
+      fail-fast: false
 
     steps:
     - name: Check out the repository
@@ -20,7 +24,7 @@ jobs:
     - name: Set up Rust
       uses: actions-rs/toolchain@v1
       with:
-        toolchain: stable
+        toolchain: ${{ matrix.rust }}
         override: true
 
     - name: Cache Cargo registry
@@ -48,10 +52,10 @@ jobs:
           ${{ runner.os }}-cargo-build-
 
     - name: Build
-      run: cargo build --verbose
+      run: cargo build --release --verbose
 
     - name: Run tests
-      run: cargo test --verbose
+      run: make test
 
     - name: Run Clippy
       run: cargo clippy -- -D warnings
