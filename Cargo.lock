@@ -21,7 +21,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "158b0bd7d75cbb6bf9c25967a48a2e9f77da95876b858eadfabaa99cd069de6e"
 dependencies = [
  "num",
- "time",
+ "time 0.1.45",
 ]
 
 [[package]]
@@ -76,7 +76,7 @@ version = "0.9.9"
 dependencies = [
  "ansi_term",
  "chrono",
- "time",
+ "time 0.2.0",
 ]
 
 [[package]]
@@ -89,6 +89,12 @@ dependencies = [
  "wasi",
  "winapi",
 ]
+
+[[package]]
+name = "time"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fcc26de0a81a07c8352b548977862908fa9863e0e6e4f0eb36b2a9f4f8845585"
 
 [[package]]
 name = "wasi"
