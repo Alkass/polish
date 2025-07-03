@@ -1,2 +1,2 @@
 test:
-	bash scripts/test.sh
+	cargo test
